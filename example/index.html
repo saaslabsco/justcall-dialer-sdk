@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import {JustCallDialer} from "./../dist/index.mjs"
+        const dialer = new JustCallDialer({
+            dialerId: "justcall-dialer",
+            onLogin: (data) => {
+                console.log("Logged in: ", data)
+            },
+            onLogout: () => {
+                console.log("Logged out")
+            }
+        })
+        dialer.load();
+    </script>
+
+    <div id="justcall-dialer" style="height: 600px; width: 380px;"></div>
+</body>
+</html>

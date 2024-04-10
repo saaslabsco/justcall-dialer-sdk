@@ -1,0 +1,23 @@
+{
+  "name": "justcall-sdk",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "dev": "vitest",
+    "test": "vitest run",
+    "build": "tsup",
+    "lint": "tsc",
+    "ci": "pnpm run lint && pnpm run test && pnpm run build"
+  },
+  "keywords": [],
+  "author": "himanshu@saaslabs.co",
+  "license": "ISC",
+  "devDependencies": {
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.4",
+    "vitest": "^1.4.0"
+  }
+}

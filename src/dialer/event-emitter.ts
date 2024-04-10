@@ -2,17 +2,31 @@ import {
   CallAnsweredEventData,
   CallEndedEventData,
   CallRingingEventData,
-  JustCallClientEmitterFunc,
+  JustCallDialerEmittableEvent,
+  JustCallDialerEmittableEventWithData,
   LoggedInEventData,
   LoginCallback,
   LogoutCallback,
 } from "../types";
 
 export class JustCallClientEventEmitter {
-  protected emitter: JustCallClientEmitterFunc;
+  private dialerEventListeners: Map<JustCallDialerEmittableEvent, Function> =
+    new Map();
 
-  constructor(emitter: JustCallClientEmitterFunc) {
-    this.emitter = emitter;
+  private emit(event: JustCallDialerEmittableEventWithData) {
+    const listener = this.dialerEventListeners.get(event.name);
+    if (listener) {
+      listener(event.data);
+    } else {
+      throw new Error("Not listening to this event: " + event.name);
+    }
+  }
+
+  public addDialerEventListener(
+    event: JustCallDialerEmittableEvent,
+    callback: Function
+  ) {
+    this.dialerEventListeners.set(event, callback);
   }
 
   public handleLoggedIn(
@@ -30,16 +44,16 @@ export class JustCallClientEventEmitter {
 
   public handleCallRinging(data: CallRingingEventData): void {
     console.log("Handling call-ringing event:", data);
-    this.emitter({ name: "call-ringing", data });
+    this.emit({ name: "call-ringing", data });
   }
 
   public handleCallAnswered(data: CallAnsweredEventData): void {
     console.log("Handling call-answered event:", data);
-    this.emitter({ name: "call-answered", data });
+    this.emit({ name: "call-answered", data });
   }
 
   public handleCallEnded(data: CallEndedEventData): void {
     console.log("Handling call-ended event:", data);
-    this.emitter({ name: "call-ended", data });
+    this.emit({ name: "call-ended", data });
   }
 }

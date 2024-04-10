@@ -57,4 +57,11 @@ export class JustCallDialer {
 
     this.dialerEventListeners.startListening();
   }
+
+  public dialNumber(number: string) {
+    if (!this.dialerIframe) {
+      throw new Error("Could not post message, pls specify dialerId correctly");
+    }
+    this.clientEventEmitter.handleExternalDial(number, this.dialerIframe);
+  }
 }

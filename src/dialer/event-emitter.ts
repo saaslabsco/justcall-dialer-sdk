@@ -56,4 +56,18 @@ export class JustCallClientEventEmitter {
     console.log("Handling call-ended event:", data);
     this.emit({ name: "call-ended", data });
   }
+
+  public handleExternalDial(
+    phoneNumber: string,
+    dialerIframe: HTMLIFrameElement
+  ): void {
+    console.log("Handling dial-number event: ", phoneNumber);
+    dialerIframe.contentWindow?.postMessage(
+      {
+        type: "dial-number",
+        phoneNumber,
+      },
+      "https://app.justcall.io"
+    );
+  }
 }

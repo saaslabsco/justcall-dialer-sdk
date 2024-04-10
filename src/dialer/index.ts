@@ -1,12 +1,19 @@
-import type { JustCallDialerInitProps, LoginCallback } from "../types";
+import type {
+  JustCallDialerInitProps,
+  LoginCallback,
+  LogoutCallback,
+} from "../types";
+import { JustCallDialerEventListeners } from "./event-listener";
+import { IFRAME_URL, IFRAME_ALLOWED_PERMISSIONS } from "../contants";
 
 export class JustCallDialer {
-  private dialerId: string;
-  private dialerDiv: HTMLElement | null = null;
-  private dialerIframe: HTMLIFrameElement | null = null;
+  protected dialerId: string;
+  protected dialerDiv: HTMLElement | null = null;
+  protected dialerIframe: HTMLIFrameElement | null = null;
+  protected dialerEventListeners: JustCallDialerEventListeners | null = null;
 
   public onLogin: LoginCallback;
-  public onLogout: () => void;
+  public onLogout: LogoutCallback;
 
   public constructor(props: JustCallDialerInitProps) {
     const { onLogin, onLogout, dialerId } = props;
@@ -27,16 +34,17 @@ export class JustCallDialer {
     }
 
     this.dialerIframe = document.createElement("iframe");
-    this.dialerIframe.src = "https://app.justcall.io/app/macapp/dialer_events";
+    this.dialerIframe.src = IFRAME_URL;
     this.dialerIframe.width = "100%";
     this.dialerIframe.height = "100%";
+    this.dialerIframe.allow = IFRAME_ALLOWED_PERMISSIONS;
 
     this.dialerDiv.appendChild(this.dialerIframe);
+
+    this.dialerEventListeners = new JustCallDialerEventListeners({
+      onLogin: this.onLogin,
+      onLogout: this.onLogout,
+    });
+    this.dialerEventListeners.startListening();
   }
 }
-
-const dialer = new JustCallDialer({
-  dialerId: "",
-  onLogin: (setting) => {},
-  onLogout: () => {},
-});

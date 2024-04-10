@@ -11,13 +11,25 @@
         const dialer = new JustCallDialer({
             dialerId: "justcall-dialer",
             onLogin: (data) => {
-                console.log("Logged in: ", data)
+                console.log("Client receiving Logged in data: ", data)
             },
             onLogout: () => {
-                console.log("Logged out")
+                console.log("Client receiving Logged out")
             }
         })
         dialer.load();
+
+        dialer.on("call-ringing", data => {
+            console.log("Client receiving call-ringing data: ", data)
+        })
+
+        dialer.on("call-answered", data => {
+            console.log("Client receiving call-answered data: ", data)
+        })
+
+        dialer.on("call-ended", data => {
+            console.log("Client receiving call-ended data: ", data)
+        })
     </script>
 
 

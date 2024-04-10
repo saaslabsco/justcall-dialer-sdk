@@ -37,3 +37,31 @@ export type CallEndedEventData = {
   direction: CallDirection;
   duration: number;
 };
+
+export type JustCallDialerEvent =
+  | "logged-in-status"
+  | "call-ringing"
+  | "call-answered"
+  | "call-ended";
+
+export type JustCallDialerEventWithData =
+  | { name: "logged-in-status"; data: LoggedInEventData }
+  | { name: "call-ringing"; data: CallRingingEventData }
+  | { name: "call-answered"; data: CallAnsweredEventData }
+  | { name: "call-ended"; data: CallEndedEventData };
+
+type ExcludeLoggedInStatus<T extends string> = T extends "logged-in-status"
+  ? never
+  : T;
+
+export type JustCallDialerEmittableEvent =
+  ExcludeLoggedInStatus<JustCallDialerEvent>;
+
+export type JustCallDialerEmittableEventWithData =
+  | { name: "call-ringing"; data: CallRingingEventData }
+  | { name: "call-answered"; data: CallAnsweredEventData }
+  | { name: "call-ended"; data: CallEndedEventData };
+
+export type JustCallClientEmitterFunc = (
+  props: JustCallDialerEmittableEventWithData
+) => void;

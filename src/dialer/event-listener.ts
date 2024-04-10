@@ -5,15 +5,9 @@ import {
   LoggedInEventData,
   LoginCallback,
   LogoutCallback,
+  JustCallDialerEvent,
 } from "../types";
 import { JustCallClientEventEmitter } from "./event-emitter";
-
-export enum JustCallDialerEvents {
-  LOGGED_IN = "logged-in-status",
-  CALL_RINGING = "call-ringing",
-  CALL_ANSWERED = "call-answered",
-  CALL_ENDED = "call-ended",
-}
 
 export class JustCallDialerEventListeners {
   private justcallClientEventEmitter: JustCallClientEventEmitter;
@@ -23,13 +17,15 @@ export class JustCallDialerEventListeners {
   constructor({
     onLogin,
     onLogout,
+    clientEventEmitter,
   }: {
     onLogin: LoginCallback;
     onLogout: LogoutCallback;
+    clientEventEmitter: JustCallClientEventEmitter;
   }) {
     this.onLogin = onLogin;
     this.onLogout = onLogout;
-    this.justcallClientEventEmitter = new JustCallClientEventEmitter();
+    this.justcallClientEventEmitter = clientEventEmitter;
   }
 
   public startListening() {
@@ -38,7 +34,7 @@ export class JustCallDialerEventListeners {
 
   private handleMessage = (
     event: MessageEvent<{
-      name: JustCallDialerEvents;
+      name: JustCallDialerEvent;
       data:
         | LoggedInEventData
         | CallRingingEventData
@@ -49,24 +45,24 @@ export class JustCallDialerEventListeners {
     const { name: eventType, data: eventData } = event.data;
 
     switch (eventType) {
-      case JustCallDialerEvents.LOGGED_IN:
+      case "logged-in-status":
         this.justcallClientEventEmitter.handleLoggedIn(
           eventData as LoggedInEventData,
           this.onLogin,
           this.onLogout
         );
         break;
-      case JustCallDialerEvents.CALL_RINGING:
+      case "call-ringing":
         this.justcallClientEventEmitter.handleCallRinging(
           eventData as CallRingingEventData
         );
         break;
-      case JustCallDialerEvents.CALL_ANSWERED:
+      case "call-answered":
         this.justcallClientEventEmitter.handleCallAnswered(
           eventData as CallAnsweredEventData
         );
         break;
-      case JustCallDialerEvents.CALL_ENDED:
+      case "call-ended":
         this.justcallClientEventEmitter.handleCallEnded(
           eventData as CallEndedEventData
         );

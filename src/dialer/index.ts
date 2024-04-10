@@ -9,28 +9,13 @@ import { IFRAME_URL, IFRAME_ALLOWED_PERMISSIONS } from "../contants";
 import { JustCallClientEventEmitter } from "./event-emitter";
 
 export class JustCallDialer {
-  protected dialerId: string;
-  protected dialerDiv: HTMLElement | null = null;
-  protected dialerIframe: HTMLIFrameElement | null = null;
-  protected dialerEventListeners: JustCallDialerEventListeners | null = null;
-  protected clientEventEmitter: JustCallClientEventEmitter;
+  private dialerId: string;
+  private dialerDiv: HTMLElement | null = null;
+  private dialerIframe: HTMLIFrameElement | null = null;
+  private dialerEventListeners: JustCallDialerEventListeners | null = null;
+  private clientEventEmitter: JustCallClientEventEmitter;
 
-  public onLogin: LoginCallback;
-  public onLogout: LogoutCallback;
-
-  public constructor(props: JustCallDialerInitProps) {
-    const { onLogin, onLogout, dialerId } = props;
-    this.onLogin = onLogin;
-    this.onLogout = onLogout;
-    this.dialerId = dialerId;
-    this.clientEventEmitter = new JustCallClientEventEmitter();
-  }
-
-  public on(event: JustCallDialerEmittableEvent, callback: Function) {
-    this.clientEventEmitter.addDialerEventListener(event, callback);
-  }
-
-  public load() {
+  private load() {
     if (!this.dialerId) {
       throw new Error("dialerId is required, to initiate Justcall sdk");
     }
@@ -56,6 +41,22 @@ export class JustCallDialer {
     });
 
     this.dialerEventListeners.startListening();
+  }
+
+  public onLogin: LoginCallback;
+  public onLogout: LogoutCallback;
+
+  public constructor(props: JustCallDialerInitProps) {
+    const { onLogin, onLogout, dialerId } = props;
+    this.onLogin = onLogin;
+    this.onLogout = onLogout;
+    this.dialerId = dialerId;
+    this.clientEventEmitter = new JustCallClientEventEmitter();
+    this.load();
+  }
+
+  public on(event: JustCallDialerEmittableEvent, callback: Function) {
+    this.clientEventEmitter.addDialerEventListener(event, callback);
   }
 
   public dialNumber(number: string) {

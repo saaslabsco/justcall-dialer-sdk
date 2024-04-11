@@ -13,7 +13,7 @@
     "build": "tsup",
     "lint": "tsc",
     "ci": "pnpm run lint && pnpm run test && pnpm run build",
-    "release": "pnpm run lint && pnpm run test && pnpm run build && pnpm publish -r"
+    "release": "pnpm run lint && pnpm run test && pnpm run build && pnpm publish -r --access=public"
   },
   "keywords": [
     "justcall",

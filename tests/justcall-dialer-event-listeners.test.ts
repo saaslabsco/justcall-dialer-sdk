@@ -13,7 +13,6 @@ import { JustCallDialer } from "../src/dialer";
 
 describe("JustCallDialerEventListeners", () => {
   let dialer: JustCallDialer;
-  let dialerIframe: HTMLIFrameElement | null;
   let dialerWindow: Window | null;
 
   beforeAll(() => {
@@ -27,15 +26,12 @@ describe("JustCallDialerEventListeners", () => {
     dialer.on("call-ringing", onCallRingingMock);
     dialer.on("call-answered", onCallAnsweredMock);
     dialer.on("call-ended", onCallEndedMock);
-
-    dialerIframe = dialer.getDialerIframe();
-    dialerWindow = dialer.getWindow();
   });
 
   it("should listen to the event emitted by iframe", async () => {
-    emitMockEvent(dialerWindow, "call-ringing");
-    emitMockEvent(dialerWindow, "call-answered");
-    emitMockEvent(dialerWindow, "call-ended");
+    emitMockEvent("call-ringing");
+    emitMockEvent("call-answered");
+    emitMockEvent("call-ended");
 
     await nextTick();
 

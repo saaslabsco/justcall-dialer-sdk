@@ -18,11 +18,7 @@ export default function mockClientRuntime() {
   document.body.appendChild(mockDialerDiv);
 }
 
-export function emitMockEvent(
-  dialerWindow: Window | null,
-  eventName: JustCallDialerEmittableEvent
-) {
-  if (!dialerWindow) throw new Error("Didnt get dialer iframe element");
+export function emitMockEvent(eventName: JustCallDialerEmittableEvent) {
   let eventData: JustCallDialerEmittableEventWithData | null = null;
 
   switch (eventName) {
@@ -63,7 +59,7 @@ export function emitMockEvent(
   }
 
   if (eventData) {
-    dialerWindow.postMessage(eventData, "*");
+    globalThis.window.postMessage(eventData, "*");
   }
 }
 

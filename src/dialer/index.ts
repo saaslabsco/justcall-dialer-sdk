@@ -17,13 +17,17 @@ export class JustCallDialer {
 
   private load() {
     if (!this.dialerId) {
-      throw new Error("dialerId is required, to initiate Justcall sdk");
+      throw new Error(
+        "Error loading justcall dialer: dialerId is required, to initiate Justcall sdk"
+      );
     }
 
     this.dialerDiv = document.getElementById(this.dialerId);
 
     if (!this.dialerDiv) {
-      throw new Error("Dialer DOM element is not found");
+      throw new Error(
+        "Error loading justcall dialer: Dialer DOM element is not found"
+      );
     }
 
     this.dialerIframe = document.createElement("iframe");
@@ -61,7 +65,9 @@ export class JustCallDialer {
 
   public dialNumber(number: string) {
     if (!this.dialerIframe) {
-      throw new Error("Could not post message, pls specify dialerId correctly");
+      throw new Error(
+        "Error loading justcall dialer: Could not post message, pls specify correct dialerId."
+      );
     }
     this.clientEventEmitter.handleExternalDial(number, this.dialerIframe);
   }

@@ -14,12 +14,8 @@ export class JustCallClientEventEmitter {
     new Map();
 
   private emit(event: JustCallDialerEmittableEventWithData) {
-    const listener = this.dialerEventListeners.get(event.name);
-    if (listener) {
-      listener(event.data);
-    } else {
-      throw new Error("Not listening to this event: " + event.name);
-    }
+    const listener = this.dialerEventListeners.get(event.name)!;
+    listener(event.data);
   }
 
   public addDialerEventListener(
@@ -34,7 +30,6 @@ export class JustCallClientEventEmitter {
     onLogin: LoginCallback,
     onLogout: LogoutCallback
   ): void {
-    console.log("Handling logged-in-status event:", data);
     if (data.logged_in) {
       onLogin(data);
     } else {
@@ -43,17 +38,14 @@ export class JustCallClientEventEmitter {
   }
 
   public handleCallRinging(data: CallRingingEventData): void {
-    console.log("Handling call-ringing event:", data);
     this.emit({ name: "call-ringing", data });
   }
 
   public handleCallAnswered(data: CallAnsweredEventData): void {
-    console.log("Handling call-answered event:", data);
     this.emit({ name: "call-answered", data });
   }
 
   public handleCallEnded(data: CallEndedEventData): void {
-    console.log("Handling call-ended event:", data);
     this.emit({ name: "call-ended", data });
   }
 
@@ -61,7 +53,6 @@ export class JustCallClientEventEmitter {
     phoneNumber: string,
     dialerIframe: HTMLIFrameElement
   ): void {
-    console.log("Handling dial-number event: ", phoneNumber);
     dialerIframe.contentWindow?.postMessage(
       {
         type: "dial-number",

@@ -1,15 +1,21 @@
-import { describe, expect, it, beforeAll } from "vitest";
+import { describe, expect, it, beforeAll, afterEach, vi } from "vitest";
 import { JustCallDialer } from "../src/dialer";
 import mockDialerRuntime, {
   DIALER_ID,
   NONEXISTENT_DIALER_ID,
   onLoginMock,
   onLogoutMock,
+  nextTick,
+  emitMockEvent,
 } from "./utils/mock-client-runtime";
 
 describe("JustCallDialer", () => {
   beforeAll(() => {
     mockDialerRuntime();
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
   });
 
   it("should throw an error if dialerId is not provided", () => {
@@ -61,5 +67,53 @@ describe("JustCallDialer", () => {
         "Error loading justcall dialer: specified dialerId is not found."
       );
     }
+  });
+
+  it("should call onLogin callback when data indicates logged_in as true", async () => {
+    const data = {
+      logged_in: true,
+      login_numbers: ["+1234567890"],
+      user_info: {
+        email: "himanshu@saaslabs.co",
+        name: "Himanshu Bhardwaz",
+      },
+    };
+
+    const dialer = new JustCallDialer({
+      dialerId: DIALER_ID,
+      onLogin: onLoginMock,
+      onLogout: onLogoutMock,
+    });
+
+    emitMockEvent("logged-in-status", data);
+
+    await nextTick();
+
+    expect(onLoginMock).toHaveBeenCalledWith(data);
+    expect(onLogoutMock).not.toHaveBeenCalled();
+  });
+
+  it("should call onLogout callback when data indicates logged_in as false", async () => {
+    const data = {
+      logged_in: false,
+      login_numbers: ["+1234567890"],
+      user_info: {
+        email: "himanshu@saaslabs.co",
+        name: "Himanshu Bhardwaz",
+      },
+    };
+
+    const dialer = new JustCallDialer({
+      dialerId: DIALER_ID,
+      onLogin: onLoginMock,
+      onLogout: onLogoutMock,
+    });
+
+    emitMockEvent("logged-in-status", data);
+
+    await nextTick();
+
+    expect(onLoginMock).not.toHaveBeenCalled();
+    expect(onLogoutMock).toHaveBeenCalled();
   });
 });

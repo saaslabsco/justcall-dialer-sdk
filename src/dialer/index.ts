@@ -64,11 +64,6 @@ export class JustCallDialer {
   }
 
   public dialNumber(number: string) {
-    if (!this.dialerIframe) {
-      throw new Error(
-        "Error loading justcall dialer: specified dialerId is not found."
-      );
-    }
-    this.clientEventEmitter.handleExternalDial(number, this.dialerIframe);
+    this.clientEventEmitter.handleExternalDial(number, this.dialerIframe!);
   }
 }

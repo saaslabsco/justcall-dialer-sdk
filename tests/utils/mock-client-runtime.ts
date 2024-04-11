@@ -1,7 +1,8 @@
 import { JSDOM } from "jsdom";
 import {
-  JustCallDialerEmittableEventWithData,
-  JustCallDialerEmittableEvent,
+  JustCallDialerEventWithData,
+  JustCallDialerEvent,
+  LoggedInEventData,
 } from "../../src/types";
 import { vi } from "vitest";
 
@@ -18,8 +19,11 @@ export default function mockClientRuntime() {
   document.body.appendChild(mockDialerDiv);
 }
 
-export function emitMockEvent(eventName: JustCallDialerEmittableEvent) {
-  let eventData: JustCallDialerEmittableEventWithData | null = null;
+export function emitMockEvent(
+  eventName: JustCallDialerEvent,
+  data?: LoggedInEventData
+) {
+  let eventData: JustCallDialerEventWithData | null = null;
 
   switch (eventName) {
     case "call-ringing":
@@ -53,6 +57,16 @@ export function emitMockEvent(eventName: JustCallDialerEmittableEvent) {
         },
       };
       break;
+    case "logged-in-status": {
+      if (data) {
+        eventData = {
+          name: "logged-in-status",
+          data,
+        };
+      }
+      break;
+    }
+
     default:
       console.error("Invalid event name:", eventName);
       return;
@@ -63,13 +77,13 @@ export function emitMockEvent(eventName: JustCallDialerEmittableEvent) {
   }
 }
 
-export const onLoginMock = function (data) {
+export const onLoginMock = vi.fn((data) => {
   console.log("Mocked onLogin function called with data: ", data);
-};
+});
 
-export const onLogoutMock = function () {
+export const onLogoutMock = vi.fn(() => {
   console.log("Mocked onLogout function called");
-};
+});
 
 export const onCallRingingMock = vi.fn(async (data) => {
   console.log("Mocked onCallRinging called with data: ", data);

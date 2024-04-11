@@ -47,20 +47,19 @@ describe("JustCallDialer", () => {
     dialer.onLogout();
   });
 
-  /*
-    // This is helpful when load is not call from class itself.
-    it("should throw an error if dialNumber is called on passing incorrect params", () => {
-      try {
-        const dialer = new JustCallDialer({
-          dialerId: NONEXISTENT_DIALER_ID,
-          onLogin: () => {},
-          onLogout: () => {},
-        });
-        dialer.dialNumber("+1234567890");
-        expect(true).toBe(false);
-      } catch (error) {
-        expect(error.message).toContain("Error loading justcall dialer");
-      }
-    });
-  */
+  it("should throw an error if dialNumber is called on passing incorrect params", () => {
+    try {
+      const dialer = new JustCallDialer({
+        dialerId: NONEXISTENT_DIALER_ID,
+        onLogin: () => {},
+        onLogout: () => {},
+      });
+      dialer.dialNumber("+1234567890");
+      expect(true).toBe(false);
+    } catch (error) {
+      expect(error.message).toContain(
+        "Error loading justcall dialer: specified dialerId is not found."
+      );
+    }
+  });
 });

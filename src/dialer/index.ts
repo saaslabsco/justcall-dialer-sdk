@@ -18,7 +18,7 @@ export class JustCallDialer {
   private load() {
     if (!this.dialerId) {
       throw new Error(
-        "Error loading justcall dialer: dialerId is required, to initiate Justcall sdk"
+        "Error loading justcall dialer: dialerId is required, to initiate Justcall sdk."
       );
     }
 
@@ -26,7 +26,7 @@ export class JustCallDialer {
 
     if (!this.dialerDiv) {
       throw new Error(
-        "Error loading justcall dialer: Dialer DOM element is not found"
+        "Error loading justcall dialer: specified dialerId is not found."
       );
     }
 
@@ -66,7 +66,7 @@ export class JustCallDialer {
   public dialNumber(number: string) {
     if (!this.dialerIframe) {
       throw new Error(
-        "Error loading justcall dialer: Could not post message, pls specify correct dialerId."
+        "Error loading justcall dialer: specified dialerId is not found."
       );
     }
     this.clientEventEmitter.handleExternalDial(number, this.dialerIframe);

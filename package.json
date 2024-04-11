@@ -2,6 +2,7 @@
   "name": "@justcall/justcall-dialer-sdk",
   "version": "1.0.0",
   "description": "SDK for seamless integration and communication with the JustCall Dialer across diverse web environments.",
+  "private": false,
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -11,7 +12,8 @@
     "coverage": "vitest run --coverage",
     "build": "tsup",
     "lint": "tsc",
-    "ci": "pnpm run lint && pnpm run test && pnpm run build"
+    "ci": "pnpm run lint && pnpm run test && pnpm run build",
+    "release": "pnpm run lint && pnpm run test && pnpm run build && pnpm run changeset publish"
   },
   "keywords": [
     "justcall",
@@ -30,6 +32,7 @@
   "author": "himanshu@saaslabs.co",
   "license": "ISC",
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
     "@types/jsdom": "^21.1.6",
     "@vitest/coverage-istanbul": "^1.4.0",
     "jsdom": "^24.0.0",

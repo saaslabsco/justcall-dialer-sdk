@@ -1,15 +1,16 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, beforeAll } from "vitest";
 import { JustCallDialer } from "../src/dialer";
-import { JSDOM } from "jsdom";
+import mockDialerRuntime, {
+  DIALER_ID,
+  NONEXISTENT_DIALER_ID,
+  onLoginMock,
+  onLogoutMock,
+} from "./utils/mock-client-runtime";
 
 describe("JustCallDialer", () => {
-  const { window } = new JSDOM();
-  globalThis.document = window.document;
-  globalThis.window = window as unknown as Window & typeof globalThis;
-
-  const mockDialerDiv = document.createElement("div");
-  mockDialerDiv.id = "justcall-dialer";
-  document.body.appendChild(mockDialerDiv);
+  beforeAll(() => {
+    mockDialerRuntime();
+  });
 
   it("should throw an error if dialerId is not provided", () => {
     // @ts-expect-error
@@ -19,7 +20,7 @@ describe("JustCallDialer", () => {
   it("should throw an error if Dialer DOM element is not found", () => {
     expect(() => {
       new JustCallDialer({
-        dialerId: "nonexistent-dialer",
+        dialerId: NONEXISTENT_DIALER_ID,
         onLogin: () => {},
         onLogout: () => {},
       });
@@ -27,15 +28,8 @@ describe("JustCallDialer", () => {
   });
 
   it("should handle onLogin and onLogout callbacks", () => {
-    const onLoginMock = function (data) {
-      console.log("Mocked onLogin function called with data: ", data);
-    };
-    const onLogoutMock = function () {
-      console.log("Mocked onLogout function called");
-    };
-
     const dialer = new JustCallDialer({
-      dialerId: "justcall-dialer",
+      dialerId: DIALER_ID,
       onLogin: onLoginMock,
       onLogout: onLogoutMock,
     });
@@ -53,17 +47,20 @@ describe("JustCallDialer", () => {
     dialer.onLogout();
   });
 
-  it("should throw an error if dialNumber is called on passing incorrect params", () => {
-    try {
-      const dialer = new JustCallDialer({
-        dialerId: "justcall-dialer-incorrect-id",
-        onLogin: () => {},
-        onLogout: () => {},
-      });
-      dialer.dialNumber("+1234567890");
-      expect(true).toBe(false);
-    } catch (error) {
-      expect(error.message).toContain("Error loading justcall dialer");
-    }
-  });
+  /*
+    // This is helpful when load is not call from class itself.
+    it("should throw an error if dialNumber is called on passing incorrect params", () => {
+      try {
+        const dialer = new JustCallDialer({
+          dialerId: NONEXISTENT_DIALER_ID,
+          onLogin: () => {},
+          onLogout: () => {},
+        });
+        dialer.dialNumber("+1234567890");
+        expect(true).toBe(false);
+      } catch (error) {
+        expect(error.message).toContain("Error loading justcall dialer");
+      }
+    });
+  */
 });

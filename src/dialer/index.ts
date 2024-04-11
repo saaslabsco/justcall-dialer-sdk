@@ -71,4 +71,12 @@ export class JustCallDialer {
     }
     this.clientEventEmitter.handleExternalDial(number, this.dialerIframe);
   }
+
+  public getDialerIframe() {
+    return this.dialerIframe;
+  }
+
+  public getWindow() {
+    return window;
+  }
 }

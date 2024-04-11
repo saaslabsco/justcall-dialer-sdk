@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.0.6
+
+### Patch Changes
+
+- 0725db6: added homepage in package json
+
 ## 1.0.5
 
 ### Patch Changes

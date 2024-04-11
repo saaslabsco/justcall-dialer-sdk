@@ -28,7 +28,7 @@ describe("JustCallDialerEventListeners", () => {
     dialer.on("call-ended", onCallEndedMock);
   });
 
-  it("should listen to the event emitted by iframe", async () => {
+  it("should listen to the event, call the earlier passed callbacks emitted by iframe", async () => {
     emitMockEvent("call-ringing");
     emitMockEvent("call-answered");
     emitMockEvent("call-ended");
@@ -38,5 +38,15 @@ describe("JustCallDialerEventListeners", () => {
     expect(onCallRingingMock).toHaveBeenCalledOnce();
     expect(onCallAnsweredMock).toHaveBeenCalledOnce();
     expect(onCallEndedMock).toHaveBeenCalledOnce();
+  });
+
+  it("should be able to emit dial-number event", () => {
+    try {
+      const number = "123456789";
+      dialer.dialNumber(number);
+      expect(true).toBe(true);
+    } catch (error) {
+      expect(error).toBeUndefined();
+    }
   });
 });

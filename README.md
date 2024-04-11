@@ -1,4 +1,4 @@
-# justcall-dialer-sdk
+# @justcall/justcall-dialer-sdk
 
 This repository contains the TypeScript code for the JustCall Dialer SDK, which allows integration of JustCall's dialer functionality into web applications.
 

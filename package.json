@@ -28,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/saaslabsco/justcall-dialer-sdk/issues"
   },
-  "homepage": "https://github.com/saaslabsco/justcall-dialer-sdk",
+  "homepage": "https://saaslabsco.github.io/justcall-dialer-sdk/",
   "author": "himanshu@saaslabs.co",
   "license": "ISC",
   "devDependencies": {

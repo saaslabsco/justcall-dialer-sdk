@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.0.3
+
+### Patch Changes
+
+- e66e632: --access=public
+
 ## 1.0.2
 
 ### Patch Changes

@@ -45,10 +45,6 @@ const dialer = new JustCallDialer({
   onLogout: () => {
     console.log("Client receiving Logged out");
   },
-  integrationToLoad: "Zendesk",
-  domToLoadPhone: "#phone-container",
-  size: "big",
-  debug: true,
 });
 ```
 

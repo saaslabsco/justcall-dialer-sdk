@@ -7,7 +7,7 @@ import {
   LogoutCallback,
   JustCallDialerEvent,
 } from "../types";
-import { JustCallClientEventEmitter } from "./event-emitter";
+import { JustCallClientEventEmitter } from "./justcall-client-event-emitter";
 
 export class JustCallDialerEventListeners {
   private justcallClientEventEmitter: JustCallClientEventEmitter;

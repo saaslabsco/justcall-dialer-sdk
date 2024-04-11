@@ -4,9 +4,9 @@ import type {
   LogoutCallback,
   JustCallDialerEmittableEvent,
 } from "../types";
-import { JustCallDialerEventListeners } from "./event-listener";
+import { JustCallDialerEventListeners } from "./justcall-dialer-event-listener";
 import { IFRAME_URL, IFRAME_ALLOWED_PERMISSIONS } from "../contants";
-import { JustCallClientEventEmitter } from "./event-emitter";
+import { JustCallClientEventEmitter } from "./justcall-client-event-emitter";
 
 export class JustCallDialer {
   private dialerId: string;

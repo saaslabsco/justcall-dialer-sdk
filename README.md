@@ -1,3 +1,1 @@
 # justcall-dialer-sdk
-
-## Introduction

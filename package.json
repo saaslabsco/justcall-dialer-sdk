@@ -1,7 +1,7 @@
 {
   "name": "@justcall/justcall-dialer-sdk",
   "version": "1.0.0",
-  "description": "",
+  "description": "SDK for seamless integration and communication with the JustCall Dialer across diverse web environments.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -13,7 +13,20 @@
     "lint": "tsc",
     "ci": "pnpm run lint && pnpm run test && pnpm run build"
   },
-  "keywords": [],
+  "keywords": [
+    "justcall",
+    "justcall-dialer-sdk",
+    "justcall-dialer",
+    "justcall-dialer-npm"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saaslabsco/justcall-dialer-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/saaslabsco/justcall-dialer-sdk/issues"
+  },
+  "homepage": "https://github.com/saaslabsco/justcall-dialer-sdk",
   "author": "himanshu@saaslabs.co",
   "license": "ISC",
   "devDependencies": {

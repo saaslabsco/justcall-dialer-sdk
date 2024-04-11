@@ -1,5 +1,5 @@
 {
-  "name": "justcall-dialer-sdk",
+  "name": "@justcall/justcall-dialer-sdk",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.js",

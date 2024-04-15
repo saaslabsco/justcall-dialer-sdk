@@ -1,5 +1,13 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.0.7
+
+### Patch Changes
+
+- 349726e: Updated docs
+- ec8297d: Custom error codes, documentation updates, Updated loosely typed event listeners
+- 5212322: Tests updated, updated error logs
+
 ## 1.0.6
 
 ### Patch Changes

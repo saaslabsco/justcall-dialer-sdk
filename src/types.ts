@@ -1,3 +1,9 @@
+import {
+  validEmittableEvents,
+  validEvents,
+  callDirections,
+} from "./utils/contants";
+
 export type LoginCallback = (userDetails: LoggedInEventData) => void;
 
 export type LogoutCallback = () => void;
@@ -8,7 +14,7 @@ export type JustCallDialerInitProps = {
   onLogout: () => void;
 };
 
-export type CallDirection = "inbound" | "outbound";
+export type CallDirection = (typeof callDirections)[number];
 
 export type LoggedInEventData = {
   logged_in: boolean;
@@ -38,29 +44,31 @@ export type CallEndedEventData = {
   duration: number;
 };
 
-export type JustCallDialerEvent =
-  | "logged-in-status"
-  | "call-ringing"
-  | "call-answered"
-  | "call-ended";
+type EventDataType = {
+  "logged-in-status": LoggedInEventData;
+  "call-ringing": CallRingingEventData;
+  "call-answered": CallAnsweredEventData;
+  "call-ended": CallEndedEventData;
+};
 
-export type JustCallDialerEventWithData =
-  | { name: "logged-in-status"; data: LoggedInEventData }
-  | { name: "call-ringing"; data: CallRingingEventData }
-  | { name: "call-answered"; data: CallAnsweredEventData }
-  | { name: "call-ended"; data: CallEndedEventData };
+type EventWithData<EventName extends keyof EventDataType> =
+  EventName extends keyof EventDataType
+    ? { name: EventName; data: EventDataType[EventName] }
+    : never;
 
-type ExcludeLoggedInStatus<T extends string> = T extends "logged-in-status"
-  ? never
-  : T;
+export type JustCallDialerEvent = (typeof validEvents)[number];
+
+export type JustCallDialerEventWithData = {
+  [EventName in keyof EventDataType]: EventWithData<EventName>;
+}[keyof EventDataType];
 
 export type JustCallDialerEmittableEvent =
-  ExcludeLoggedInStatus<JustCallDialerEvent>;
+  (typeof validEmittableEvents)[number];
 
-export type JustCallDialerEmittableEventWithData =
-  | { name: "call-ringing"; data: CallRingingEventData }
-  | { name: "call-answered"; data: CallAnsweredEventData }
-  | { name: "call-ended"; data: CallEndedEventData };
+export type JustCallDialerEmittableEventWithData = Exclude<
+  JustCallDialerEventWithData,
+  EventWithData<"logged-in-status">
+>;
 
 export type JustCallClientEmitterFunc = (
   props: JustCallDialerEmittableEventWithData

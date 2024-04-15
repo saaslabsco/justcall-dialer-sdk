@@ -8,3 +8,5 @@ src
 .config.ts
 .github
 tsconfig.json
+tsup.config.json
+vitest.config.json

@@ -8,6 +8,7 @@
 <body>
     <script type="module">
         import {JustCallDialer} from "./../dist/index.mjs"
+        
         const dialer = new JustCallDialer({
             dialerId: "justcall-dialer",
             onLogin: (data) => {
@@ -17,7 +18,6 @@
                 console.log("Client receiving Logged out")
             }
         })
-        // dialer.load();
 
         dialer.on("call-ringing", data => {
             console.log("Client receiving call-ringing data: ", data)
@@ -36,6 +36,6 @@
         }, 3000)
     </script>
 
-    <div id="justcall-dialer" style="height: 600px; width: 380px;"></div>
+    <div id="justcall-dialer" style="position:fixed; bottom:20px; right:20px;"></div>
 </body>
 </html>

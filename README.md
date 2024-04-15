@@ -125,6 +125,32 @@ This data object is passed to the callback function when a call ends. It contain
 - `direction` (CallDirection): Specifies the direction of the call, either "inbound" or "outbound".
 - `duration` (number): The duration of the call session in seconds.
 
+## Justcall Dialer Error Codes
+
+The `JustcallDialerErrorCode` enum provides error codes for handling various scenarios in the JustCall Dialer SDK.
+
+### Error Codes:
+
+- `invalid_event_name`: This error occurs when an invalid event name is provided.
+- `no_event_name`: This error occurs when no event name is provided.
+- `dialer_not_ready`: This error occurs when the JustCall Dialer is not ready for use.
+- `unknown_error`: This error occurs when an unknown error is encountered during the operation of the JustCall Dialer SDK.
+
+These error codes are useful for identifying and handling different error scenarios in the JustCall Dialer SDK.
+
+## Authorizations for `<iframe>`
+
+Please note that @justcall/justcall-dialer-sdk will produce an iframe with the following permissions granted:
+
+```html
+<iframe
+  allow="microphone; autoplay; clipboard-read; clipboard-write; hid"
+  src="ttps://app.justcall.io/app/macapp/dialer_events"
+  style="width='350px' height='610px'"
+>
+</iframe>
+```
+
 ## Contribution
 
 We welcome contributions from the community to improve the JustCall Dialer SDK. To contribute, follow these steps:

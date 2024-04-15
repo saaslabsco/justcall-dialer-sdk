@@ -4,8 +4,8 @@ export enum JustcallDialerErrorCode {
   invalid_event_name = "invalid_event_name",
   no_event_name = "no_event_name",
   dialer_not_ready = "dialer_not_ready",
-  unknown_error = "unknown_error",
   browser_environment_required = "browser_environment_required",
+  unknown_error = "unknown_error",
 }
 
 export class JustcallDialerError extends Error {

@@ -7,6 +7,8 @@ import mockDialerRuntime, {
   onLogoutMock,
   nextTick,
   emitMockEvent,
+  mockLoggedOutdata,
+  mockLoginData,
 } from "./utils/mock-client-runtime";
 
 describe("JustCallDialer", () => {
@@ -19,8 +21,14 @@ describe("JustCallDialer", () => {
   });
 
   it("should throw an error if dialerId is not provided", () => {
-    // @ts-expect-error
-    expect(() => new JustCallDialer({})).toThrowError("dialerId is required");
+    expect(
+      () =>
+        // @ts-expect-error
+        new JustCallDialer({
+          onLogin: onLoginMock,
+          onLogout: onLogoutMock,
+        })
+    ).toThrowError("no_dialer_id");
   });
 
   it("should throw an error if Dialer DOM element is not found", () => {
@@ -30,27 +38,23 @@ describe("JustCallDialer", () => {
         onLogin: () => {},
         onLogout: () => {},
       });
-    }).toThrowError("Error loading justcall dialer");
+    }).toThrowError("dialer_id_not_found");
   });
 
-  it("should handle onLogin and onLogout callbacks", () => {
+  it("should handle onLogin and onLogout callbacks", async () => {
     const dialer = new JustCallDialer({
       dialerId: DIALER_ID,
       onLogin: onLoginMock,
       onLogout: onLogoutMock,
     });
 
-    // Simulate login
-    dialer.onLogin({
-      logged_in: true,
-      login_numbers: ["+1234567890"],
-      user_info: {
-        email: "himanshu@saaslabs.co",
-        name: "Himanshu Bhardwaz",
-      },
-    });
-    // Simulate logout
-    dialer.onLogout();
+    emitMockEvent("logged-in-status", mockLoginData);
+    emitMockEvent("logged-in-status", mockLoggedOutdata);
+
+    await nextTick();
+
+    expect(onLoginMock).toHaveBeenCalledOnce();
+    expect(onLogoutMock).toHaveBeenCalledOnce();
   });
 
   it("should throw an error if dialNumber is called on passing incorrect params", () => {
@@ -63,9 +67,7 @@ describe("JustCallDialer", () => {
       dialer.dialNumber("+1234567890");
       expect(true).toBe(false);
     } catch (error) {
-      expect(error.message).toContain(
-        "Error loading justcall dialer: specified dialerId is not found."
-      );
+      expect(error.message).toContain("dialer_id_not_found");
     }
   });
 

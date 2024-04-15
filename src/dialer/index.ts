@@ -6,13 +6,14 @@ import type {
 } from "../types";
 import { JustCallDialerEventListeners } from "./justcall-dialer-event-listener";
 import { JustCallClientEventEmitter } from "./justcall-client-event-emitter";
-import dialerIframeTemplate from "../template/dialer-iframe";
+import getJustcallDialerIframeTempl from "../template/dialer-iframe";
 import {
   handleError,
   JustcallDialerErrorCode,
   JustcallDialerError,
 } from "../utils/errors";
 import { validEmittableEvents } from "../utils/contants";
+import { IFRAME_URL, IFRAME_ALLOWED_PERMISSIONS } from "../utils/contants";
 
 export class JustCallDialer {
   private dialerId: string;
@@ -25,17 +26,13 @@ export class JustCallDialer {
   private init() {
     try {
       if (!this.dialerId) {
-        throw new Error(
-          "Error loading justcall dialer: dialerId is required, to initiate Justcall sdk."
-        );
+        throw handleError(JustcallDialerErrorCode.no_dialer_id);
       }
 
       this.dialerDiv = document.getElementById(this.dialerId);
 
       if (!this.dialerDiv) {
-        throw new Error(
-          "Error loading justcall dialer: specified dialerId is not found."
-        );
+        throw handleError(JustcallDialerErrorCode.dialer_id_not_found);
       }
 
       this.load();
@@ -47,9 +44,9 @@ export class JustCallDialer {
 
   private load() {
     try {
-      this.dialerIframe = dialerIframeTemplate;
+      this.dialerIframe = getJustcallDialerIframeTempl(document);
 
-      this.dialerDiv?.appendChild(this.dialerIframe);
+      this.dialerDiv?.appendChild(this.dialerIframe!);
 
       this.dialerEventListeners = new JustCallDialerEventListeners({
         onLogin: this.onLogin,
@@ -59,7 +56,7 @@ export class JustCallDialer {
 
       this.dialerEventListeners.startListening();
 
-      this.dialerIframe.onload = () => {
+      this.dialerIframe!.onload = () => {
         this.isDialerReady = true;
       };
     } catch (error) {

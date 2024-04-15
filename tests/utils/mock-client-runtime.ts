@@ -6,6 +6,24 @@ import {
 } from "../../src/types";
 import { vi } from "vitest";
 
+export const mockLoginData = {
+  logged_in: true,
+  login_numbers: ["+1234567890"],
+  user_info: {
+    email: "himanshu@saaslabs.co",
+    name: "Himanshu Bhardwaz",
+  },
+};
+
+export const mockLoggedOutdata = {
+  logged_in: false,
+  login_numbers: ["+1234567890"],
+  user_info: {
+    email: "himanshu@saaslabs.co",
+    name: "Himanshu Bhardwaz",
+  },
+};
+
 export const DIALER_ID = "justcall-dialer";
 export const NONEXISTENT_DIALER_ID = "nonexistent-dialer";
 

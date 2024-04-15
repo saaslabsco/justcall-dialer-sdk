@@ -1,9 +1,13 @@
 import { IFRAME_URL, IFRAME_ALLOWED_PERMISSIONS } from "../utils/contants";
 
-const parser = new DOMParser();
-const iframeElement = parser.parseFromString(
-  `<iframe src="${IFRAME_URL}" width="350px" height="610px" allow="${IFRAME_ALLOWED_PERMISSIONS}"></iframe>`,
-  "text/html"
-).body.firstChild as HTMLIFrameElement;
+// TODO - simple fix for now, will expore later
+export default function getJustcallDialerIframe(document: Document) {
+  const iframeElement = document.createElement("iframe");
 
-export default iframeElement;
+  iframeElement.src = IFRAME_URL;
+  iframeElement.width = "350px";
+  iframeElement.height = "610px";
+  iframeElement.allow = IFRAME_ALLOWED_PERMISSIONS;
+
+  return iframeElement;
+}

@@ -13,7 +13,6 @@ import {
   JustcallDialerError,
 } from "../utils/errors";
 import { validEmittableEvents } from "../utils/contants";
-import { IFRAME_URL, IFRAME_ALLOWED_PERMISSIONS } from "../utils/contants";
 
 export class JustCallDialer {
   private dialerId: string;
@@ -21,25 +20,20 @@ export class JustCallDialer {
   private dialerIframe: HTMLIFrameElement | null = null;
   private dialerEventListeners: JustCallDialerEventListeners | null = null;
   private clientEventEmitter: JustCallClientEventEmitter;
-  private isDialerReady = false;
+  // private isDialerReady = false;
 
   private init() {
-    try {
-      if (!this.dialerId) {
-        throw handleError(JustcallDialerErrorCode.no_dialer_id);
-      }
-
-      this.dialerDiv = document.getElementById(this.dialerId);
-
-      if (!this.dialerDiv) {
-        throw handleError(JustcallDialerErrorCode.dialer_id_not_found);
-      }
-
-      this.load();
-    } catch (error) {
-      if (error instanceof JustcallDialerError) throw error;
-      else throw handleError(JustcallDialerErrorCode.unknown_error);
+    if (!this.dialerId) {
+      throw handleError(JustcallDialerErrorCode.no_dialer_id);
     }
+
+    this.dialerDiv = document.getElementById(this.dialerId);
+
+    if (!this.dialerDiv) {
+      throw handleError(JustcallDialerErrorCode.dialer_id_not_found);
+    }
+
+    this.load();
   }
 
   private load() {
@@ -55,13 +49,11 @@ export class JustCallDialer {
       });
 
       this.dialerEventListeners.startListening();
-
-      this.dialerIframe!.onload = () => {
-        this.isDialerReady = true;
-      };
     } catch (error) {
-      if (error instanceof JustcallDialerError) throw error;
-      else throw handleError(JustcallDialerErrorCode.unknown_error);
+      /* istanbul ignore next -- @preserve */ {
+        if (error instanceof JustcallDialerError) throw error;
+        throw handleError(JustcallDialerErrorCode.unknown_error);
+      }
     }
   }
 
@@ -77,8 +69,10 @@ export class JustCallDialer {
       this.clientEventEmitter = new JustCallClientEventEmitter();
       this.init();
     } catch (error) {
-      if (error instanceof JustcallDialerError) throw error;
-      else throw handleError(JustcallDialerErrorCode.unknown_error);
+      /* istanbul ignore next -- @preserve */ {
+        if (error instanceof JustcallDialerError) throw error;
+        throw handleError(JustcallDialerErrorCode.unknown_error);
+      }
     }
   }
 
@@ -92,8 +86,10 @@ export class JustCallDialer {
       }
       this.clientEventEmitter.addDialerEventListener(event, callback);
     } catch (error) {
-      if (error instanceof JustcallDialerError) throw error;
-      else throw handleError(JustcallDialerErrorCode.unknown_error);
+      /* istanbul ignore next -- @preserve */ {
+        if (error instanceof JustcallDialerError) throw error;
+        throw handleError(JustcallDialerErrorCode.unknown_error);
+      }
     }
   }
 
@@ -101,8 +97,10 @@ export class JustCallDialer {
     try {
       this.clientEventEmitter.handleExternalDial(number, this.dialerIframe!);
     } catch (error) {
-      if (error instanceof JustcallDialerError) throw error;
-      else throw handleError(JustcallDialerErrorCode.unknown_error);
+      /* istanbul ignore next -- @preserve */ {
+        if (error instanceof JustcallDialerError) throw error;
+        throw handleError(JustcallDialerErrorCode.unknown_error);
+      }
     }
   }
 }

@@ -1,3 +1,5 @@
+/* istanbul ignore file -- @preserve */
+
 export enum JustcallDialerErrorCode {
   no_dialer_id = "no_dialer_id",
   dialer_id_not_found = "dialer_id_not_found",

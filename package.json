@@ -17,9 +17,11 @@
   },
   "keywords": [
     "justcall",
+    "@justcall/justcall-dialer-sdk",
     "justcall-dialer-sdk",
     "justcall-dialer",
-    "justcall-dialer-npm"
+    "justcall-dialer-npm",
+    "justcall-npm"
   ],
   "repository": {
     "type": "git",

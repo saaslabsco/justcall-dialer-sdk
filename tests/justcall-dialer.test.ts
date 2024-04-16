@@ -41,20 +41,28 @@ describe("JustCallDialer", () => {
     }).toThrowError("dialer_id_not_found");
   });
 
-  it("should handle onLogin and onLogout callbacks", async () => {
-    const dialer = new JustCallDialer({
-      dialerId: DIALER_ID,
-      onLogin: onLoginMock,
-      onLogout: onLogoutMock,
-    });
+  it("should throw no_event_name error if no event name is passed to 'on' event listener callback", () => {
+    expect(() => {
+      const dialer = new JustCallDialer({
+        dialerId: DIALER_ID,
+        onLogin: onLoginMock,
+        onLogout: onLogoutMock,
+      });
+      // @ts-expect-error
+      dialer.on("", () => {});
+    }).toThrowError("no_event_name");
+  });
 
-    emitMockEvent("logged-in-status", mockLoginData);
-    emitMockEvent("logged-in-status", mockLoggedOutdata);
-
-    await nextTick();
-
-    expect(onLoginMock).toHaveBeenCalledOnce();
-    expect(onLogoutMock).toHaveBeenCalledOnce();
+  it("should throw invalid_event_name error if incorrect event name is passed to 'on' event listener callback", () => {
+    expect(() => {
+      const dialer = new JustCallDialer({
+        dialerId: DIALER_ID,
+        onLogin: onLoginMock,
+        onLogout: onLogoutMock,
+      });
+      // @ts-expect-error
+      dialer.on("invalid_event_name", () => {});
+    }).toThrowError("invalid_event_name");
   });
 
   it("should throw an error if dialNumber is called on passing incorrect params", () => {
@@ -72,46 +80,28 @@ describe("JustCallDialer", () => {
   });
 
   it("should call onLogin callback when data indicates logged_in as true", async () => {
-    const data = {
-      logged_in: true,
-      login_numbers: ["+1234567890"],
-      user_info: {
-        email: "himanshu@saaslabs.co",
-        name: "Himanshu Bhardwaz",
-      },
-    };
-
-    const dialer = new JustCallDialer({
+    new JustCallDialer({
       dialerId: DIALER_ID,
       onLogin: onLoginMock,
       onLogout: onLogoutMock,
     });
 
-    emitMockEvent("logged-in-status", data);
+    emitMockEvent("logged-in-status", mockLoginData);
 
     await nextTick();
 
-    expect(onLoginMock).toHaveBeenCalledWith(data);
+    expect(onLoginMock).toHaveBeenCalledWith(mockLoginData);
     expect(onLogoutMock).not.toHaveBeenCalled();
   });
 
   it("should call onLogout callback when data indicates logged_in as false", async () => {
-    const data = {
-      logged_in: false,
-      login_numbers: ["+1234567890"],
-      user_info: {
-        email: "himanshu@saaslabs.co",
-        name: "Himanshu Bhardwaz",
-      },
-    };
-
-    const dialer = new JustCallDialer({
+    new JustCallDialer({
       dialerId: DIALER_ID,
       onLogin: onLoginMock,
       onLogout: onLogoutMock,
     });
 
-    emitMockEvent("logged-in-status", data);
+    emitMockEvent("logged-in-status", mockLoggedOutdata);
 
     await nextTick();
 

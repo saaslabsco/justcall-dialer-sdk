@@ -15,7 +15,7 @@
     "ci": "pnpm run lint && pnpm run test && pnpm run build",
     "release": "pnpm run lint && pnpm run test && pnpm run build && pnpm publish -r --access=public",
     "convert-readme": "markdown-to-html-cli --input README.md --output docs/index.html",
-    "precommit": "pnpm run convert-readme && pnpm run coverage",
+    "precommit": "pnpm run convert-readme",
     "prepare": "husky"
   },
   "keywords": [

@@ -10,3 +10,4 @@ src
 tsconfig.json
 tsup.config.json
 vitest.config.json
+docs

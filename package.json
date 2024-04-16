@@ -13,7 +13,9 @@
     "build": "tsup",
     "lint": "tsc",
     "ci": "pnpm run lint && pnpm run test && pnpm run build",
-    "release": "pnpm run lint && pnpm run test && pnpm run build && pnpm publish -r --access=public"
+    "release": "pnpm run lint && pnpm run test && pnpm run build && pnpm publish -r --access=public",
+    "convert-readme": "markdown-to-html-cli --input README.md --output docs/index.html --config=config/conf.json",
+    "precommit": "pnpm run convert-readme"
   },
   "keywords": [
     "justcall",
@@ -37,10 +39,37 @@
     "@changesets/cli": "^2.27.1",
     "@types/jsdom": "^21.1.6",
     "@vitest/coverage-istanbul": "^1.4.0",
+    "husky": "^9.0.11",
     "jsdom": "^24.0.0",
     "markdown-to-html-cli": "^4.1.0",
     "tsup": "^8.0.2",
     "typescript": "^5.4.4",
     "vitest": "^1.4.0"
+  },
+  "markdown-to-html": {
+    "document": {
+      "title": "@justcall/justcall-dialer-sdk",
+      "description": "SDK for seamless integration and communication with the JustCall Dialer across diverse web environments.",
+      "style": "",
+      "meta": [
+        {
+          "description": "SDK for seamless integration and communication with the JustCall Dialer across diverse web environments."
+        },
+        {
+          "keywords": "store,localStorage,lightweight,JavaScript"
+        }
+      ]
+    },
+    "favicon": "https://cdn.justcall.io/app/assets/img/justcall-icon.svg",
+    "github-corners": "https://github.com/jaywcjlove/markdown-to-html-cli",
+    "reurls": {
+      "README-zh.md": "index.zh.html",
+      "README.md": "index.html"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pnpm run precommit"
+    }
   }
 }

@@ -14,7 +14,7 @@
     "lint": "tsc",
     "ci": "pnpm run lint && pnpm run test && pnpm run build",
     "release": "pnpm run lint && pnpm run test && pnpm run build && pnpm publish -r --access=public",
-    "convert-readme": "markdown-to-html-cli --input README.md --output docs/index.html --config=config/conf.json",
+    "convert-readme": "markdown-to-html-cli --input README.md --output docs/index.html",
     "precommit": "pnpm run convert-readme"
   },
   "keywords": [
@@ -56,7 +56,7 @@
           "description": "SDK for seamless integration and communication with the JustCall Dialer across diverse web environments."
         },
         {
-          "keywords": "store,localStorage,lightweight,JavaScript"
+          "keywords": "Justcall SDK, @justcall/justcall-dialer-sdk, Justcall dialer sdk, Justcall NPM"
         }
       ]
     },

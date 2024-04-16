@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.0.11
+
+### Patch Changes
+
+- 492cdfa: adding docs to npmignore && clearing pnpm cache
+
 ## 1.0.10
 
 ### Patch Changes

@@ -64,7 +64,6 @@
     "favicon": "https://cdn.justcall.io/app/assets/img/justcall-icon.svg",
     "github-corners": "https://github.com/jaywcjlove/markdown-to-html-cli",
     "reurls": {
-      "README-zh.md": "index.zh.html",
       "README.md": "index.html"
     }
   },

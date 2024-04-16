@@ -176,3 +176,7 @@ We welcome contributions from the community to improve the JustCall Dialer SDK. 
    ```
 
 5. Push your changes to your fork of the repository and create PR.
+
+## Code coverage
+
+Find our code coverage report here: https://saaslabsco.github.io/justcall-dialer-sdk/coverage/

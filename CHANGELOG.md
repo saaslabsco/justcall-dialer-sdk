@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.0.9
+
+### Patch Changes
+
+- d3890cd: Published code coverage report
+
 ## 1.0.8
 
 ### Patch Changes

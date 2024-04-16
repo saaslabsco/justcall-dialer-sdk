@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.0.10
+
+### Patch Changes
+
+- 93e6fdc: Unsubcribe method, to be able to unsubscribe from events
+
 ## 1.0.9
 
 ### Patch Changes

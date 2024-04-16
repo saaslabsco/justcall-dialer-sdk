@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.0.8
+
+### Patch Changes
+
+- 206b612: Updated tests, improved coverage: 100%
+
 ## 1.0.7
 
 ### Patch Changes

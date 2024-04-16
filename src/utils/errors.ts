@@ -6,6 +6,7 @@ export enum JustcallDialerErrorCode {
   invalid_event_name = "invalid_event_name",
   no_event_name = "no_event_name",
   dialer_not_ready = "dialer_not_ready",
+  not_subscribed_to_event = "not_subscribed_to_event",
   browser_environment_required = "browser_environment_required",
   unknown_error = "unknown_error",
 }
@@ -37,6 +38,10 @@ export const handleError = (
       );
     case JustcallDialerErrorCode.no_event_name:
       return new JustcallDialerError(JustcallDialerErrorCode.no_event_name);
+    case JustcallDialerErrorCode.not_subscribed_to_event:
+      return new JustcallDialerError(
+        JustcallDialerErrorCode.not_subscribed_to_event
+      );
     case JustcallDialerErrorCode.dialer_not_ready:
       return new JustcallDialerError(JustcallDialerErrorCode.dialer_not_ready);
     case JustcallDialerErrorCode.browser_environment_required:

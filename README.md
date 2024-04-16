@@ -76,6 +76,30 @@ dialer.on("call-ended", function (data) {
 });
 ```
 
+## unsubscribe(event: JustCallDialerEmittableEvent)
+
+Unsubscribes from a specific event emitted by the JustCall dialer that you are currently listening to.
+
+### Parameters
+
+- `event`: The name of the event that is already subscribed to.
+
+### Example
+
+```typescript
+dialer.unsubscribe("call-ringing");
+```
+
+## unsubscribeAll()
+
+Unsubscribes from all events that you are currently listening to, emitted by the JustCall dialer.
+
+### Example
+
+```typescript
+dialer.unsubscribeAll();
+```
+
 ## JustCallDialer `dialNumber` Method
 
 The `dialNumber` method of the `JustCallDialer` class prepopulates the dialer with the provided phone number. It takes one parameter:

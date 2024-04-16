@@ -13,7 +13,6 @@ import { JustCallDialer } from "../src/dialer";
 
 describe("JustCallDialerEventListeners", () => {
   let dialer: JustCallDialer;
-  let dialerWindow: Window | null;
 
   beforeAll(() => {
     mockDialerRuntime();
@@ -22,13 +21,15 @@ describe("JustCallDialerEventListeners", () => {
       onLogin: onLoginMock,
       onLogout: onLogoutMock,
     });
-
-    dialer.on("call-ringing", onCallRingingMock);
-    dialer.on("call-answered", onCallAnsweredMock);
-    dialer.on("call-ended", onCallEndedMock);
   });
 
   it("should listen to the event, call the earlier passed callbacks emitted by iframe", async () => {
+    dialer.on("call-ringing", onCallRingingMock);
+    dialer.on("call-answered", onCallAnsweredMock);
+    dialer.on("call-ended", onCallEndedMock);
+
+    await nextTick();
+
     emitMockEvent("call-ringing");
     emitMockEvent("call-answered");
     emitMockEvent("call-ended");
@@ -38,6 +39,8 @@ describe("JustCallDialerEventListeners", () => {
     expect(onCallRingingMock).toHaveBeenCalledOnce();
     expect(onCallAnsweredMock).toHaveBeenCalledOnce();
     expect(onCallEndedMock).toHaveBeenCalledOnce();
+
+    dialer.unsubscribeAll();
   });
 
   it("should be able to emit dial-number event", () => {
@@ -45,6 +48,20 @@ describe("JustCallDialerEventListeners", () => {
       const number = "123456789";
       dialer.dialNumber(number);
       expect(true).toBe(true);
+    } catch (error) {
+      expect(error).toBeUndefined();
+    }
+  });
+
+  it("should only be able to unsubscribe from event, it has already subscribed to", () => {
+    expect(() => {
+      dialer.on("call-answered", onCallAnsweredMock);
+      dialer.unsubscribe("call-ended");
+    }).toThrowError("not_subscribed_to_event");
+
+    try {
+      dialer.on("call-answered", onCallAnsweredMock);
+      dialer.unsubscribe("call-answered");
     } catch (error) {
       expect(error).toBeUndefined();
     }

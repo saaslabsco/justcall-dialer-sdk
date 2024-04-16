@@ -103,4 +103,26 @@ export class JustCallDialer {
       }
     }
   }
+
+  public unsubscribe(event: JustCallDialerEmittableEvent) {
+    try {
+      this.clientEventEmitter.unsubscribeFromDialerEvent(event);
+    } catch (error) {
+      /* istanbul ignore next -- @preserve */ {
+        if (error instanceof JustcallDialerError) throw error;
+        throw handleError(JustcallDialerErrorCode.unknown_error);
+      }
+    }
+  }
+
+  public unsubscribeAll() {
+    try {
+      this.clientEventEmitter.unsubscribeAll();
+    } catch (error) {
+      /* istanbul ignore next -- @preserve */ {
+        if (error instanceof JustcallDialerError) throw error;
+        throw handleError(JustcallDialerErrorCode.unknown_error);
+      }
+    }
+  }
 }

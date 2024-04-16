@@ -9,13 +9,18 @@ import {
   LogoutCallback,
 } from "../types";
 
+import { JustcallDialerErrorCode, handleError } from "../utils/errors";
+
 export class JustCallClientEventEmitter {
   private dialerEventListeners: Map<JustCallDialerEmittableEvent, Function> =
     new Map();
 
   private emit(event: JustCallDialerEmittableEventWithData) {
-    const listener = this.dialerEventListeners.get(event.name)!;
-    listener(event.data);
+    const listener = this.dialerEventListeners.get(event.name);
+    /* istanbul ignore if -- @preserve */
+    if (listener) {
+      listener(event.data);
+    }
   }
 
   public addDialerEventListener(
@@ -23,6 +28,16 @@ export class JustCallClientEventEmitter {
     callback: Function
   ) {
     this.dialerEventListeners.set(event, callback);
+  }
+
+  public unsubscribeFromDialerEvent(event: JustCallDialerEmittableEvent) {
+    if (this.dialerEventListeners.has(event)) {
+      this.dialerEventListeners.delete(event);
+    } else throw handleError(JustcallDialerErrorCode.not_subscribed_to_event);
+  }
+
+  public unsubscribeAll() {
+    this.dialerEventListeners.clear();
   }
 
   public handleLoggedIn(

@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.0.12
+
+### Patch Changes
+
+- 2dbc40b: added not_subscribed_to_event error to docs
+
 ## 1.0.11
 
 ### Patch Changes

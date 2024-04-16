@@ -158,10 +158,11 @@ The `JustcallDialerErrorCode` enum provides error codes for handling various sce
 - `invalid_event_name`: This error occurs when an invalid event name is provided.
 - `no_event_name`: This error occurs when no event name is provided.
 - `dialer_not_ready`: This error occurs when the JustCall Dialer is not ready for use.
-- `unknown_error`: This error occurs when an unknown error is encountered during the operation of the JustCall Dialer SDK.
+- `not_subscribed_to_event`: This error occurs when attempting to unsubscribe from an event that you were not subscribed to in the first place.
 - `no_dialer_id`: This error occurs when no dialer ID is provided.
 - `dialer_id_not_found`: This error occurs when the specified dialer ID is not found.
 - `browser_environment_required`: This error occurs when the JustCall Dialer SDK is run in non-browser environments.
+- `unknown_error`: This error occurs when an unknown error is encountered during the operation of the JustCall Dialer SDK.
 
 These error codes are useful for identifying and handling different error scenarios in the JustCall Dialer SDK.
 

@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.1.0
+
+### Minor Changes
+
+- efccbd5: Updated docs, Releasing 1.1.0
+
 ## 1.0.13
 
 ### Patch Changes

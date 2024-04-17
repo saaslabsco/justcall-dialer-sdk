@@ -1,10 +1,8 @@
-# @justcall/justcall-dialer-sdk
+# JustCall SDK
 
-This repository contains the TypeScript code for the JustCall Dialer SDK, which allows integration of JustCall's dialer functionality into web applications.
+This repository contains the TypeScript code for the JustCall Dialer SDK, which allows integration of [JustCall](https://justcall.io) dialer functionality into web applications.
 
-## Getting Started
-
-To use the JustCall Dialer SDK in your project, follow these steps:
+## Installation
 
 Install the SDK package using npm, yarn on pnpm:
 
@@ -32,7 +30,7 @@ To use the JustCall Dialer SDK, you need to create an instance of the `JustCallD
 - `onLogin`: A callback function triggered when the user logs in. It receives user details and integration settings, if any.
 - `onLogout`: A callback function triggered when the user logs out.
 
-Example usage:
+Example:
 
 ```typescript
 import { JustCallDialer } from "@justcall/justcall-dialer-sdk";
@@ -60,7 +58,7 @@ The `on` method of the `JustCallDialer` class allows you to listen for events em
 
 - `callback`: A callback function that will be executed when the specified event occurs. The function receives event data as a parameter.
 
-Example usage:
+Example:
 
 ```typescript
 dialer.on("call-ringing", (data) => {
@@ -106,7 +104,7 @@ The `dialNumber` method of the `JustCallDialer` class prepopulates the dialer wi
 
 - `number` (string): The phone number to dial. It should be in the format accepted by the JustCall Dialer.
 
-Example usage:
+Example:
 
 ```typescript
 dialer.dialNumber("+1234567890");
@@ -124,6 +122,17 @@ This data object is passed to the `onLogin` callback function when the user logs
   - `email` (string): The email address of the user.
   - `name` (string): The name of the user.
 
+```json
+{
+  "logged_in": true,
+  "login_numbers": ["+1234567890", "+1987654321"],
+  "user_info": {
+    "email": "user@example.com",
+    "name": "John Doe"
+  }
+}
+```
+
 ### `CallRingingEventData`
 
 This data object is passed to the callback function when an incoming call starts ringing. It contains the following properties:
@@ -133,6 +142,15 @@ This data object is passed to the callback function when an incoming call starts
 - `to` (string): The phone number being called.
 - `call_sid` (string): The unique identifier for the call session.
 
+```json
+{
+  "direction": "inbound",
+  "from": "+1234567890",
+  "to": "+1987654321",
+  "call_sid": "abcdefgh123456"
+}
+```
+
 ### `CallAnsweredEventData`
 
 This data object is passed to the callback function when an incoming call is answered. It contains the following properties:
@@ -141,6 +159,14 @@ This data object is passed to the callback function when an incoming call is ans
 - `direction` (CallDirection): Specifies the direction of the call, either "inbound" or "outbound".
 - `answered_status` (string): Indicates the status of the call when answered.
 
+```json
+{
+  "call_sid": "CAdemocallsid21345",
+  "direction": "inbound",
+  "answered_status": "answered"
+}
+```
+
 ### `CallEndedEventData`
 
 This data object is passed to the callback function when a call ends. It contains the following properties:
@@ -148,6 +174,14 @@ This data object is passed to the callback function when a call ends. It contain
 - `call_sid` (string): The unique identifier for the call session.
 - `direction` (CallDirection): Specifies the direction of the call, either "inbound" or "outbound".
 - `duration` (number): The duration of the call session in seconds.
+
+```json
+{
+  "call_sid": "CAdemocallsid21345",
+  "direction": "inbound",
+  "duration": 120
+}
+```
 
 ## Justcall Dialer Error Codes
 

@@ -159,10 +159,9 @@ class MarkdownStyle extends HTMLElement {
     }
 }
 customElements.define('markdown-style', MarkdownStyle);</script><markdown-style style="max-width: 960px; margin: 0 auto 60px auto; padding: 8px;max-width: 960px;" class="markdown-style">
-    <h1 id="justcalljustcall-dialer-sdk"><a class="anchor" aria-hidden="true" tabindex="-1" href="#justcalljustcall-dialer-sdk"><span class="octicon octicon-link"></span></a>@justcall/justcall-dialer-sdk</h1>
-    <p>This repository contains the TypeScript code for the JustCall Dialer SDK, which allows integration of JustCall's dialer functionality into web applications.</p>
-    <h2 id="getting-started"><a class="anchor" aria-hidden="true" tabindex="-1" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
-    <p>To use the JustCall Dialer SDK in your project, follow these steps:</p>
+    <h1 id="justcall-sdk"><a class="anchor" aria-hidden="true" tabindex="-1" href="#justcall-sdk"><span class="octicon octicon-link"></span></a>JustCall SDK</h1>
+    <p>This repository contains the TypeScript code for the JustCall Dialer SDK, which allows integration of <a href="https://justcall.io/">JustCall</a> dialer functionality into web applications.</p>
+    <h2 id="installation"><a class="anchor" aria-hidden="true" tabindex="-1" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
     <p>Install the SDK package using npm, yarn on pnpm:</p>
     <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">npm</span> <span class="token function">install</span> @justcall/justcall-dialer-sdk
 </span></code><div onclick="copied(this)" data-code="npm install @justcall/justcall-dialer-sdk
@@ -182,7 +181,7 @@ customElements.define('markdown-style', MarkdownStyle);</script><markdown-style 
       <li><code>onLogin</code>: A callback function triggered when the user logs in. It receives user details and integration settings, if any.</li>
       <li><code>onLogout</code>: A callback function triggered when the user logs out.</li>
     </ul>
-    <p>Example usage:</p>
+    <p>Example:</p>
     <pre class="language-typescript"><code class="language-typescript code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">import</span> <span class="token punctuation">{</span> JustCallDialer <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@justcall/justcall-dialer-sdk"</span><span class="token punctuation">;</span>
 </span><span class="code-line line-number" line="2">
 </span><span class="code-line line-number" line="3"><span class="token keyword">const</span> dialer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JustCallDialer</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
@@ -221,7 +220,7 @@ const dialer = new JustCallDialer({
         <p><code>callback</code>: A callback function that will be executed when the specified event occurs. The function receives event data as a parameter.</p>
       </li>
     </ul>
-    <p>Example usage:</p>
+    <p>Example:</p>
     <pre class="language-typescript"><code class="language-typescript code-highlight"><span class="code-line line-number" line="1">dialer<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">"call-ringing"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="2">  <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Client receiving call-ringing data: "</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </span><span class="code-line line-number" line="3"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -266,7 +265,7 @@ dialer.on(&#x22;call-ended&#x22;, function (data) {
     <ul>
       <li><code>number</code> (string): The phone number to dial. It should be in the format accepted by the JustCall Dialer.</li>
     </ul>
-    <p>Example usage:</p>
+    <p>Example:</p>
     <pre class="language-typescript"><code class="language-typescript code-highlight"><span class="code-line line-number" line="1">dialer<span class="token punctuation">.</span><span class="token function">dialNumber</span><span class="token punctuation">(</span><span class="token string">"+1234567890"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </span></code><div onclick="copied(this)" data-code="dialer.dialNumber(&#x22;+1234567890&#x22;);
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
@@ -283,6 +282,23 @@ dialer.on(&#x22;call-ended&#x22;, function (data) {
         </ul>
       </li>
     </ul>
+    <pre class="language-json"><code class="language-json code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">  <span class="token property">"logged_in"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="3">  <span class="token property">"login_numbers"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"+1234567890"</span><span class="token punctuation">,</span> <span class="token string">"+1987654321"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="4">  <span class="token property">"user_info"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="5">    <span class="token property">"email"</span><span class="token operator">:</span> <span class="token string">"user@example.com"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="6">    <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"John Doe"</span>
+</span><span class="code-line line-number" line="7">  <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="8"><span class="token punctuation">}</span>
+</span></code><div onclick="copied(this)" data-code="{
+  &#x22;logged_in&#x22;: true,
+  &#x22;login_numbers&#x22;: [&#x22;+1234567890&#x22;, &#x22;+1987654321&#x22;],
+  &#x22;user_info&#x22;: {
+    &#x22;email&#x22;: &#x22;user@example.com&#x22;,
+    &#x22;name&#x22;: &#x22;John Doe&#x22;
+  }
+}
+" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
     <h3 id="callringingeventdata"><a class="anchor" aria-hidden="true" tabindex="-1" href="#callringingeventdata"><span class="octicon octicon-link"></span></a><code>CallRingingEventData</code></h3>
     <p>This data object is passed to the callback function when an incoming call starts ringing. It contains the following properties:</p>
     <ul>
@@ -291,6 +307,19 @@ dialer.on(&#x22;call-ended&#x22;, function (data) {
       <li><code>to</code> (string): The phone number being called.</li>
       <li><code>call_sid</code> (string): The unique identifier for the call session.</li>
     </ul>
+    <pre class="language-json"><code class="language-json code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">  <span class="token property">"direction"</span><span class="token operator">:</span> <span class="token string">"inbound"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="3">  <span class="token property">"from"</span><span class="token operator">:</span> <span class="token string">"+1234567890"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="4">  <span class="token property">"to"</span><span class="token operator">:</span> <span class="token string">"+1987654321"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="5">  <span class="token property">"call_sid"</span><span class="token operator">:</span> <span class="token string">"abcdefgh123456"</span>
+</span><span class="code-line line-number" line="6"><span class="token punctuation">}</span>
+</span></code><div onclick="copied(this)" data-code="{
+  &#x22;direction&#x22;: &#x22;inbound&#x22;,
+  &#x22;from&#x22;: &#x22;+1234567890&#x22;,
+  &#x22;to&#x22;: &#x22;+1987654321&#x22;,
+  &#x22;call_sid&#x22;: &#x22;abcdefgh123456&#x22;
+}
+" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
     <h3 id="callansweredeventdata"><a class="anchor" aria-hidden="true" tabindex="-1" href="#callansweredeventdata"><span class="octicon octicon-link"></span></a><code>CallAnsweredEventData</code></h3>
     <p>This data object is passed to the callback function when an incoming call is answered. It contains the following properties:</p>
     <ul>
@@ -298,6 +327,17 @@ dialer.on(&#x22;call-ended&#x22;, function (data) {
       <li><code>direction</code> (CallDirection): Specifies the direction of the call, either "inbound" or "outbound".</li>
       <li><code>answered_status</code> (string): Indicates the status of the call when answered.</li>
     </ul>
+    <pre class="language-json"><code class="language-json code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">  <span class="token property">"call_sid"</span><span class="token operator">:</span> <span class="token string">"CAdemocallsid21345"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="3">  <span class="token property">"direction"</span><span class="token operator">:</span> <span class="token string">"inbound"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="4">  <span class="token property">"answered_status"</span><span class="token operator">:</span> <span class="token string">"answered"</span>
+</span><span class="code-line line-number" line="5"><span class="token punctuation">}</span>
+</span></code><div onclick="copied(this)" data-code="{
+  &#x22;call_sid&#x22;: &#x22;CAdemocallsid21345&#x22;,
+  &#x22;direction&#x22;: &#x22;inbound&#x22;,
+  &#x22;answered_status&#x22;: &#x22;answered&#x22;
+}
+" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
     <h3 id="callendedeventdata"><a class="anchor" aria-hidden="true" tabindex="-1" href="#callendedeventdata"><span class="octicon octicon-link"></span></a><code>CallEndedEventData</code></h3>
     <p>This data object is passed to the callback function when a call ends. It contains the following properties:</p>
     <ul>
@@ -305,6 +345,17 @@ dialer.on(&#x22;call-ended&#x22;, function (data) {
       <li><code>direction</code> (CallDirection): Specifies the direction of the call, either "inbound" or "outbound".</li>
       <li><code>duration</code> (number): The duration of the call session in seconds.</li>
     </ul>
+    <pre class="language-json"><code class="language-json code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">  <span class="token property">"call_sid"</span><span class="token operator">:</span> <span class="token string">"CAdemocallsid21345"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="3">  <span class="token property">"direction"</span><span class="token operator">:</span> <span class="token string">"inbound"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="4">  <span class="token property">"duration"</span><span class="token operator">:</span> <span class="token number">120</span>
+</span><span class="code-line line-number" line="5"><span class="token punctuation">}</span>
+</span></code><div onclick="copied(this)" data-code="{
+  &#x22;call_sid&#x22;: &#x22;CAdemocallsid21345&#x22;,
+  &#x22;direction&#x22;: &#x22;inbound&#x22;,
+  &#x22;duration&#x22;: 120
+}
+" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
     <h2 id="justcall-dialer-error-codes"><a class="anchor" aria-hidden="true" tabindex="-1" href="#justcall-dialer-error-codes"><span class="octicon octicon-link"></span></a>Justcall Dialer Error Codes</h2>
     <p>The <code>JustcallDialerErrorCode</code> enum provides error codes for handling various scenarios in the JustCall Dialer SDK.</p>
     <h3 id="error-codes"><a class="anchor" aria-hidden="true" tabindex="-1" href="#error-codes"><span class="octicon octicon-link"></span></a>Error Codes:</h3>

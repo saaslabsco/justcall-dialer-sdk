@@ -1,10 +1,12 @@
 # JustCall SDK
 
-This repository contains the TypeScript code for the JustCall Dialer SDK, which allows integration of [JustCall](https://justcall.io) dialer functionality into web applications.
+This repository contains the TypeScript code for the JustCall Dialer SDK, which allows integration of [JustCall Dialer](https://app.justcall.io/dialer) functionality into web applications.
+
+You need a [JustCall](https://app.justcall.io/) account to be able to use the dialer and the following features.
 
 ## Installation
 
-Install the SDK package using npm, yarn on pnpm:
+Install the SDK package using npm, yarn or pnpm:
 
 ```bash
 npm install @justcall/justcall-dialer-sdk

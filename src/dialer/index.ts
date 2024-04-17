@@ -20,7 +20,6 @@ export class JustCallDialer {
   private dialerIframe: HTMLIFrameElement | null = null;
   private dialerEventListeners: JustCallDialerEventListeners | null = null;
   private clientEventEmitter: JustCallClientEventEmitter;
-  // private isDialerReady = false;
 
   private init() {
     if (!this.dialerId) {

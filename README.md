@@ -6,7 +6,7 @@ This repository contains the TypeScript code for the JustCall Dialer SDK, which 
 
 To use the JustCall Dialer SDK in your project, follow these steps:
 
-Install the SDK package using npm or yarn:
+Install the SDK package using npm, yarn on pnpm:
 
 ```bash
 npm install @justcall/justcall-dialer-sdk
@@ -54,9 +54,9 @@ The `on` method of the `JustCallDialer` class allows you to listen for events em
 
 - `event`: The type of event you want to listen for. Currently supported events are:
 
-  - `call-ringing`: Triggered when an incoming call starts ringing.
-  - `call-answered`: Triggered when an incoming call is answered.
-  - `call-ended`: Triggered when a call ends.
+  - `call-ringing`: Triggered when an incoming/outgoing call starts ringing.
+  - `call-answered`: Triggered when an incoming/outgoing call is answered.
+  - `call-ended`: Triggered when a incoming/outgoing call ends.
 
 - `callback`: A callback function that will be executed when the specified event occurs. The function receives event data as a parameter.
 

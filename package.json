@@ -35,7 +35,7 @@
   },
   "homepage": "https://saaslabsco.github.io/justcall-dialer-sdk/",
   "author": "himanshu@saaslabs.co",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
     "@types/jsdom": "^21.1.6",

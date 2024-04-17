@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.0.13
+
+### Patch Changes
+
+- 87de9bc: Updated iframe url
+
 ## 1.0.12
 
 ### Patch Changes

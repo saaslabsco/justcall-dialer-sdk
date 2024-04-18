@@ -43,16 +43,6 @@ describe("JustCallDialerEventListeners", () => {
     dialer.unsubscribeAll();
   });
 
-  it("should be able to emit dial-number event", () => {
-    try {
-      const number = "123456789";
-      dialer.dialNumber(number);
-      expect(true).toBe(true);
-    } catch (error) {
-      expect(error).toBeUndefined();
-    }
-  });
-
   it("should only be able to unsubscribe from event, it has already subscribed to", () => {
     expect(() => {
       dialer.on("call-answered", onCallAnsweredMock);

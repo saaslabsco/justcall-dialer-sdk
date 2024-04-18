@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.2.0
+
+### Minor Changes
+
+- 5ea4aa4: isLoggedIn and destroy methods, onReady callback, ready promise
+
 ## 1.1.1
 
 ### Patch Changes

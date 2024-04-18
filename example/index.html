@@ -31,8 +31,10 @@
             console.log("Client receiving call-ended data: ", data)
         })
 
-        setTimeout(() => {
-            dialer.dialNumber("+1234567890")
+        setTimeout(async () => {
+            dialer.dialNumber("+123456789990");
+            const isLoggedIn = await dialer.isLoggedIn();
+            console.log("Client receiving is-logged-in data: ", isLoggedIn);
         }, 3000)
     </script>
 

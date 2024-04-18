@@ -44,11 +44,14 @@ export type CallEndedEventData = {
   duration: number;
 };
 
+export type IsLoggedInData = boolean;
+
 type EventDataType = {
   "logged-in-status": LoggedInEventData;
   "call-ringing": CallRingingEventData;
   "call-answered": CallAnsweredEventData;
   "call-ended": CallEndedEventData;
+  "is-logged-in": IsLoggedInData;
 };
 
 type EventWithData<EventName extends keyof EventDataType> =
@@ -67,7 +70,7 @@ export type JustCallDialerEmittableEvent =
 
 export type JustCallDialerEmittableEventWithData = Exclude<
   JustCallDialerEventWithData,
-  EventWithData<"logged-in-status">
+  EventWithData<"logged-in-status"> | EventWithData<"is-logged-in">
 >;
 
 export type JustCallClientEmitterFunc = (

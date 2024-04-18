@@ -3,6 +3,7 @@ import type {
   LoginCallback,
   LogoutCallback,
   JustCallDialerEmittableEvent,
+  OnDialerReadyCallback,
 } from "../types";
 import { JustCallDialerEventListeners } from "./justcall-dialer-event-listener";
 import { JustCallClientEventEmitter } from "./justcall-client-event-emitter";
@@ -22,16 +23,29 @@ export class JustCallDialer {
   private dialerEventListeners: JustCallDialerEventListeners | null = null;
   private clientEventEmitter: JustCallClientEventEmitter;
   private dialerEventEmitter: JustCallDialerEventEmitter | null = null;
+  private dialerReadyPromise: Promise<void>;
+  private resolveDialerReadyPromise!: () => void;
+  private rejectDialerReadyPromise!: () => void;
 
-  public onLogin: LoginCallback;
-  public onLogout: LogoutCallback;
+  public onLogin: LoginCallback | null = null;
+  public onLogout: LogoutCallback | null = null;
+  public onReady: OnDialerReadyCallback | null = null;
+
+  public isDialerReady = false;
 
   public constructor(props: JustCallDialerInitProps) {
     try {
-      const { onLogin, onLogout, dialerId } = props;
+      const { onLogin, onLogout, dialerId, onReady = null } = props;
       this.onLogin = onLogin;
       this.onLogout = onLogout;
       this.dialerId = dialerId;
+      this.onReady = onReady;
+
+      this.dialerReadyPromise = new Promise((resolve, reject) => {
+        this.resolveDialerReadyPromise = resolve;
+        this.rejectDialerReadyPromise = reject;
+      });
+
       this.clientEventEmitter = new JustCallClientEventEmitter();
       this.init();
     } catch (error) {
@@ -63,8 +77,8 @@ export class JustCallDialer {
       this.dialerDiv?.appendChild(this.dialerIframe!);
 
       this.dialerEventListeners = new JustCallDialerEventListeners({
-        onLogin: this.onLogin,
-        onLogout: this.onLogout,
+        onLogin: this.onLogin!,
+        onLogout: this.onLogout!,
         clientEventEmitter: this.clientEventEmitter,
       });
 
@@ -73,6 +87,16 @@ export class JustCallDialer {
       );
 
       this.dialerEventListeners.startListening();
+
+      this.dialerIframe.onload = () => {
+        this.isDialerReady = true;
+        if (this.onReady) this.onReady();
+        this.resolveDialerReadyPromise();
+      };
+
+      this.dialerIframe.onerror = () => {
+        this.rejectDialerReadyPromise();
+      };
     } catch (error) {
       /* istanbul ignore next -- @preserve */ {
         if (error instanceof JustcallDialerError) throw error;
@@ -90,17 +114,6 @@ export class JustCallDialer {
         throw handleError(JustcallDialerErrorCode.invalid_event_name);
       }
       this.clientEventEmitter.addDialerEventListener(event, callback);
-    } catch (error) {
-      /* istanbul ignore next -- @preserve */ {
-        if (error instanceof JustcallDialerError) throw error;
-        throw handleError(JustcallDialerErrorCode.unknown_error);
-      }
-    }
-  }
-
-  public dialNumber(number: string) {
-    try {
-      this.dialerEventEmitter!.handleExternalDial(number);
     } catch (error) {
       /* istanbul ignore next -- @preserve */ {
         if (error instanceof JustcallDialerError) throw error;
@@ -131,8 +144,61 @@ export class JustCallDialer {
     }
   }
 
+  public dialNumber(number: string) {
+    try {
+      if (!this.isDialerReady) {
+        throw handleError(JustcallDialerErrorCode.dialer_not_ready);
+      }
+      this.dialerEventEmitter!.handleExternalDial(number);
+    } catch (error) {
+      /* istanbul ignore next -- @preserve */ {
+        if (error instanceof JustcallDialerError) throw error;
+        throw handleError(JustcallDialerErrorCode.unknown_error);
+      }
+    }
+  }
+
   public async isLoggedIn() {
-    this.dialerEventEmitter?.handleIsLoggedIn();
-    return await this.dialerEventListeners?.awaitForEvent("is-logged-in");
+    try {
+      if (!this.isDialerReady) {
+        throw handleError(JustcallDialerErrorCode.dialer_not_ready);
+      }
+      this.dialerEventEmitter?.handleIsLoggedIn();
+      return await this.dialerEventListeners?.awaitForEvent("is-logged-in");
+    } catch (error) {
+      /* istanbul ignore next -- @preserve */ {
+        if (error instanceof JustcallDialerError) throw error;
+        throw handleError(JustcallDialerErrorCode.unknown_error);
+      }
+    }
+  }
+
+  public async ready() {
+    return this.dialerReadyPromise;
+  }
+
+  public destroy() {
+    try {
+      this.unsubscribeAll();
+
+      if (this.dialerIframe && this.dialerIframe.parentNode) {
+        this.dialerIframe.parentNode.removeChild(this.dialerIframe);
+        this.dialerIframe = null;
+      }
+
+      this.dialerDiv = null;
+      this.dialerEventListeners = null;
+      this.dialerEventEmitter = null;
+      this.isDialerReady = false;
+
+      this.onLogin = null;
+      this.onLogout = null;
+      this.onReady = null;
+    } catch (error) {
+      /* istanbul ignore next -- @preserve */ {
+        if (error instanceof JustcallDialerError) throw error;
+        throw handleError(JustcallDialerErrorCode.unknown_error);
+      }
+    }
   }
 }

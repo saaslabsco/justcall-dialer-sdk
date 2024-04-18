@@ -57,11 +57,6 @@ export class JustCallDialerEventListeners {
     const { name: eventType, data: eventData } = event.data;
 
     const awiatedPromise = this.awaitedListeners.get(eventType);
-    if (awiatedPromise) {
-      // TODO: handle retries and reject, happy case done
-      awiatedPromise.resolve(eventData as IsLoggedInData);
-      this.awaitedListeners.delete(eventType);
-    }
 
     switch (eventType) {
       case "logged-in-status":
@@ -85,6 +80,12 @@ export class JustCallDialerEventListeners {
         this.justcallClientEventEmitter.handleCallEnded(
           eventData as CallEndedEventData
         );
+      case "is-logged-in":
+        if (awiatedPromise) {
+          const isLoggedInBool = eventData === "true";
+          awiatedPromise.resolve(isLoggedInBool);
+          this.awaitedListeners.delete(eventType);
+        }
         break;
     }
   };

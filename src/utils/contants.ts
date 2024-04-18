@@ -16,4 +16,6 @@ export const validEvents = [
   "is-logged-in",
 ] as const;
 
+export const isLoggedIn = ["true", "false"] as const;
+
 export const callDirections = ["inbound", "outbound"] as const;

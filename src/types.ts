@@ -2,16 +2,20 @@ import {
   validEmittableEvents,
   validEvents,
   callDirections,
+  isLoggedIn,
 } from "./utils/contants";
 
 export type LoginCallback = (userDetails: LoggedInEventData) => void;
 
 export type LogoutCallback = () => void;
 
+export type OnDialerReadyCallback = () => void;
+
 export type JustCallDialerInitProps = {
   dialerId: string;
   onLogin: LoginCallback;
-  onLogout: () => void;
+  onLogout: LogoutCallback;
+  onReady?: OnDialerReadyCallback;
 };
 
 export type CallDirection = (typeof callDirections)[number];
@@ -44,7 +48,7 @@ export type CallEndedEventData = {
   duration: number;
 };
 
-export type IsLoggedInData = boolean;
+export type IsLoggedInData = (typeof isLoggedIn)[number];
 
 type EventDataType = {
   "logged-in-status": LoggedInEventData;

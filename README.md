@@ -24,13 +24,14 @@ or pnpm
 pnpm add @justcall/justcall-dialer-sdk
 ```
 
-## JustCall Dialer SDK Constructor
+## Constructor
 
 To use the JustCall Dialer SDK, you need to create an instance of the `JustCallDialer` class using its constructor. The constructor accepts an object with the following parameters:
 
 - `dialerId`: The id of the HTML element where the JustCall Dialer iframe will be embedded.
 - `onLogin`: A callback function triggered when the user logs in. It receives user details and integration settings, if any.
 - `onLogout`: A callback function triggered when the user logs out.
+- `onReady`: A callback function triggered when the JustCall Dialer is ready for use.
 
 Example:
 
@@ -45,10 +46,13 @@ const dialer = new JustCallDialer({
   onLogout: () => {
     console.log("Client receiving Logged out");
   },
+  onReady: () => {
+    console.log("Client received on ready callback");
+  },
 });
 ```
 
-## JustCallDialer `on` Methods
+## `on` Methods
 
 The `on` method of the `JustCallDialer` class allows you to listen for events emitted by the JustCall Dialer. It takes two parameters:
 
@@ -76,7 +80,7 @@ dialer.on("call-ended", function (data) {
 });
 ```
 
-## unsubscribe(event: JustCallDialerEmittableEvent)
+## `unsubscribe(event: JustCallDialerEmittableEvent)` method:
 
 Unsubscribes from a specific event emitted by the JustCall dialer that you are currently listening to.
 
@@ -90,7 +94,7 @@ Unsubscribes from a specific event emitted by the JustCall dialer that you are c
 dialer.unsubscribe("call-ringing");
 ```
 
-## unsubscribeAll()
+## `unsubscribeAll()` method
 
 Unsubscribes from all events that you are currently listening to, emitted by the JustCall dialer.
 
@@ -100,16 +104,57 @@ Unsubscribes from all events that you are currently listening to, emitted by the
 dialer.unsubscribeAll();
 ```
 
-## JustCallDialer `dialNumber` Method
+## `ready` method
+
+The `ready` method of the `JustCallDialer` class ensures that the JustCall Dialer is ready for use before executing specific actions. It returns a Promise that resolves when the dialer is ready.
+
+```typescript
+// Ensure the dialer is ready before using isLoggedIn and dialNumber methods
+await dialer.ready();
+const isLoggedIn = await dialer.isLoggedIn(); // returns true or false
+dialer.dialNumber("+1234567890");
+```
+
+## `isLoggedIn` Method
+
+The `isLoggedIn` method of the `JustCallDialer` class checks whether the user is logged in to JustCall Dialer. It returns a Promise that resolves to a boolean value indicating the login status.
+
+Note: Ensure that the dialer is in a ready state before calling this method.
+
+Example:
+
+```typescript
+await dialer.ready();
+const isLoggedIn = await dialer.isLoggedIn(); // returns true or false
+```
+
+## `dialNumber` Method
 
 The `dialNumber` method of the `JustCallDialer` class prepopulates the dialer with the provided phone number. It takes one parameter:
 
 - `number` (string): The phone number to dial. It should be in the format accepted by the JustCall Dialer.
 
+Note: Ensure that the dialer is in a ready state before calling this method.
+
 Example:
 
 ```typescript
+await dialer.ready();
 dialer.dialNumber("+1234567890");
+```
+
+## `destroy` Method
+
+The `destroy` method of the `JustCallDialer` class is used to clean up and release resources when the JustCall Dialer instance is no longer needed. It performs the following actions:
+
+- Unsubscribes from all events that the instance is currently listening to.
+- Removes the JustCall Dialer iframe from the DOM.
+- Resets internal state variables and event listeners.
+
+Example:
+
+```typescript
+dialer.destroy();
 ```
 
 ## Event Data Types (Received in Respective Callbacks):

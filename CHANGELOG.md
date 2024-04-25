@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.2.1
+
+### Patch Changes
+
+- 003fad2: coverage updates, test cases for new functions and improved iframe ui
+
 ## 1.2.0
 
 ### Minor Changes

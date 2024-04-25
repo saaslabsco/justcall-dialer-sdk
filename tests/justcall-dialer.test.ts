@@ -11,6 +11,18 @@ import mockDialerRuntime, {
   mockLoginData,
 } from "./utils/mock-client-runtime";
 
+describe("Before init JustCallDialer", () => {
+  it("should throw error, if dialer is not initiated in browser environment", () => {
+    expect(() => {
+      const dialer = new JustCallDialer({
+        onLogin: onLoginMock,
+        onLogout: onLogoutMock,
+        dialerId: DIALER_ID,
+      });
+    }).toThrowError("browser_environment_required");
+  });
+});
+
 describe("JustCallDialer", () => {
   beforeAll(() => {
     mockDialerRuntime();
@@ -18,6 +30,19 @@ describe("JustCallDialer", () => {
 
   afterEach(() => {
     vi.clearAllMocks();
+  });
+
+  it("destroy(): cleans up resources and resets properties", () => {
+    const dialer = new JustCallDialer({
+      dialerId: DIALER_ID,
+      onLogin: onLoginMock,
+      onLogout: onLogoutMock,
+    });
+    dialer.destroy();
+    expect(dialer.isDialerReady).toBe(false);
+    expect(dialer.onLogin).toBeNull();
+    expect(dialer.onLogout).toBeNull();
+    expect(dialer.onReady).toBeNull();
   });
 
   it("should throw an error if dialerId is not provided", () => {
@@ -65,14 +90,38 @@ describe("JustCallDialer", () => {
     }).toThrowError("invalid_event_name");
   });
 
-  it("should throw an error if dialNumber is called on passing incorrect params", () => {
+  it("should throw an error if dialNumber is called before dialer is ready", () => {
+    expect(() => {
+      const dialer = new JustCallDialer({
+        dialerId: DIALER_ID,
+        onLogin: () => {},
+        onLogout: () => {},
+      });
+      dialer.dialNumber("+12433434334");
+    }).toThrowError("dialer_not_ready");
+  });
+
+  it("should throw an error if isLoggedIn is called before dialer is ready", async () => {
+    try {
+      const dialer = new JustCallDialer({
+        dialerId: DIALER_ID,
+        onLogin: () => {},
+        onLogout: () => {},
+      });
+      await dialer.isLoggedIn();
+      expect(true).toBe(false);
+    } catch (error) {
+      expect(error.message).toContain("dialer_not_ready");
+    }
+  });
+
+  it("should throw an error if dialNumber is called on passing incorrect params", async () => {
     try {
       const dialer = new JustCallDialer({
         dialerId: NONEXISTENT_DIALER_ID,
         onLogin: () => {},
         onLogout: () => {},
       });
-      dialer.dialNumber("+1234567890");
       expect(true).toBe(false);
     } catch (error) {
       expect(error.message).toContain("dialer_id_not_found");

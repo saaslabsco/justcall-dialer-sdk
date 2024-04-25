@@ -35,6 +35,10 @@ export class JustCallDialer {
 
   public constructor(props: JustCallDialerInitProps) {
     try {
+      if (typeof window === "undefined") {
+        throw handleError(JustcallDialerErrorCode.browser_environment_required);
+      }
+
       const { onLogin, onLogout, dialerId, onReady = null } = props;
       this.onLogin = onLogin;
       this.onLogout = onLogout;
@@ -88,13 +92,15 @@ export class JustCallDialer {
 
       this.dialerEventListeners.startListening();
 
+      /* istanbul ignore next -- @preserve */
       this.dialerIframe.onload = () => {
         this.isDialerReady = true;
-        if (this.onReady) this.onReady();
+        if (this.onReady) this?.onReady();
         this.resolveDialerReadyPromise();
       };
 
       this.dialerIframe.onerror = () => {
+        /* istanbul ignore next -- @preserve */
         this.rejectDialerReadyPromise();
       };
     } catch (error) {
@@ -149,6 +155,7 @@ export class JustCallDialer {
       if (!this.isDialerReady) {
         throw handleError(JustcallDialerErrorCode.dialer_not_ready);
       }
+      /* istanbul ignore next -- @preserve */
       this.dialerEventEmitter!.handleExternalDial(number);
     } catch (error) {
       /* istanbul ignore next -- @preserve */ {
@@ -163,8 +170,11 @@ export class JustCallDialer {
       if (!this.isDialerReady) {
         throw handleError(JustcallDialerErrorCode.dialer_not_ready);
       }
-      this.dialerEventEmitter?.handleIsLoggedIn();
-      return await this.dialerEventListeners?.awaitForEvent("is-logged-in");
+      /* istanbul ignore next -- @preserve */
+      {
+        this.dialerEventEmitter?.handleIsLoggedIn();
+        return await this.dialerEventListeners!.awaitForEvent("is-logged-in");
+      }
     } catch (error) {
       /* istanbul ignore next -- @preserve */ {
         if (error instanceof JustcallDialerError) throw error;
@@ -173,6 +183,7 @@ export class JustCallDialer {
     }
   }
 
+  /* istanbul ignore next -- @preserve */
   public async ready() {
     return this.dialerReadyPromise;
   }

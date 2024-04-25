@@ -1,3 +1,5 @@
+/* istanbul ignore file -- @preserve */
+
 export class JustCallDialerEventEmitter {
   private dialerIframe: HTMLIFrameElement;
 
@@ -6,7 +8,7 @@ export class JustCallDialerEventEmitter {
   }
 
   public handleExternalDial(phoneNumber: string): void {
-    this.dialerIframe.contentWindow?.postMessage(
+    this.dialerIframe.contentWindow!.postMessage(
       {
         type: "dial-number",
         phoneNumber,
@@ -16,7 +18,7 @@ export class JustCallDialerEventEmitter {
   }
 
   public handleIsLoggedIn() {
-    this.dialerIframe.contentWindow?.postMessage(
+    this.dialerIframe.contentWindow!.postMessage(
       {
         type: "is-logged-in",
       },

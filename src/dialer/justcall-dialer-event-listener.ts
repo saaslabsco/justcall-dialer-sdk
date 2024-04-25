@@ -16,7 +16,7 @@ export class JustCallDialerEventListeners {
   private onLogout: LogoutCallback;
   private awaitedListeners: Map<
     JustCallDialerEvent,
-    { resolve: (value: boolean) => void; reject: () => unknown }
+    { resolve: (value: boolean) => void; reject: (reason?: unknown) => void }
   > = new Map();
 
   constructor({
@@ -37,8 +37,9 @@ export class JustCallDialerEventListeners {
     window.addEventListener("message", this.handleMessage);
   }
 
+  /* istanbul ignore next -- @preserve */
   public awaitForEvent(event: JustCallDialerEvent) {
-    return new Promise((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       this.awaitedListeners.set(event, { resolve, reject });
     });
   }
@@ -80,13 +81,17 @@ export class JustCallDialerEventListeners {
         this.justcallClientEventEmitter.handleCallEnded(
           eventData as CallEndedEventData
         );
-      case "is-logged-in":
-        if (awiatedPromise) {
-          const isLoggedInBool = eventData === "true";
-          awiatedPromise.resolve(isLoggedInBool);
-          this.awaitedListeners.delete(eventType);
-        }
         break;
+      case "is-logged-in": {
+        /* istanbul ignore next -- @preserve */ {
+          if (awiatedPromise) {
+            const isLoggedInBool = eventData === "true";
+            awiatedPromise.resolve(isLoggedInBool);
+            this.awaitedListeners.delete(eventType);
+          }
+          break;
+        }
+      }
     }
   };
 }

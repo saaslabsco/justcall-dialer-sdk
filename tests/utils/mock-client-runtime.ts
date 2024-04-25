@@ -6,6 +6,18 @@ import {
 } from "../../src/types";
 import { vi } from "vitest";
 
+export default function mockClientRuntime() {
+  const { window } = new JSDOM();
+  globalThis.document = window.document;
+  globalThis.window = window as unknown as Window & typeof globalThis;
+
+  const mockDialerDiv = document.createElement("div");
+  mockDialerDiv.id = DIALER_ID;
+  document.body.appendChild(mockDialerDiv);
+}
+
+// export function mock
+
 export const mockLoginData = {
   logged_in: true,
   login_numbers: ["+1234567890"],
@@ -26,16 +38,6 @@ export const mockLoggedOutdata = {
 
 export const DIALER_ID = "justcall-dialer";
 export const NONEXISTENT_DIALER_ID = "nonexistent-dialer";
-
-export default function mockClientRuntime() {
-  const { window } = new JSDOM();
-  globalThis.document = window.document;
-  globalThis.window = window as unknown as Window & typeof globalThis;
-
-  const mockDialerDiv = document.createElement("div");
-  mockDialerDiv.id = DIALER_ID;
-  document.body.appendChild(mockDialerDiv);
-}
 
 export function emitMockEvent(
   eventName: JustCallDialerEvent,

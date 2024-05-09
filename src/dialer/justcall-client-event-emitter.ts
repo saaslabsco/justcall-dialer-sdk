@@ -42,13 +42,13 @@ export class JustCallClientEventEmitter {
 
   public handleLoggedIn(
     data: LoggedInEventData,
-    onLogin: LoginCallback,
-    onLogout: LogoutCallback
+    onLogin: LoginCallback | null,
+    onLogout: LogoutCallback | null
   ): void {
     if (data.logged_in) {
-      onLogin(data);
+      if (onLogin) onLogin(data);
     } else {
-      onLogout();
+      if (onLogout) onLogout();
     }
   }
 

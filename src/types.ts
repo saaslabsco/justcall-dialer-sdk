@@ -13,8 +13,8 @@ export type OnDialerReadyCallback = () => void;
 
 export type JustCallDialerInitProps = {
   dialerId: string;
-  onLogin: LoginCallback;
-  onLogout: LogoutCallback;
+  onLogin?: LoginCallback;
+  onLogout?: LogoutCallback;
   onReady?: OnDialerReadyCallback;
 };
 

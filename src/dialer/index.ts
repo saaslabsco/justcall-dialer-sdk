@@ -39,7 +39,7 @@ export class JustCallDialer {
         throw handleError(JustcallDialerErrorCode.browser_environment_required);
       }
 
-      const { onLogin, onLogout, dialerId, onReady = null } = props;
+      const { onLogin = null, onLogout = null, dialerId, onReady = null } = props;
       this.onLogin = onLogin;
       this.onLogout = onLogout;
       this.dialerId = dialerId;
@@ -81,8 +81,8 @@ export class JustCallDialer {
       this.dialerDiv?.appendChild(this.dialerIframe!);
 
       this.dialerEventListeners = new JustCallDialerEventListeners({
-        onLogin: this.onLogin!,
-        onLogout: this.onLogout!,
+        onLogin: this.onLogin,
+        onLogout: this.onLogout,
         clientEventEmitter: this.clientEventEmitter,
       });
 

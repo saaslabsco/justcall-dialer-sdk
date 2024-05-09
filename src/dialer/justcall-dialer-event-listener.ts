@@ -12,8 +12,8 @@ import { JustCallClientEventEmitter } from "./justcall-client-event-emitter";
 
 export class JustCallDialerEventListeners {
   private justcallClientEventEmitter: JustCallClientEventEmitter;
-  private onLogin: LoginCallback;
-  private onLogout: LogoutCallback;
+  private onLogin: LoginCallback | null = null;
+  private onLogout: LogoutCallback | null = null;
   private awaitedListeners: Map<
     JustCallDialerEvent,
     { resolve: (value: boolean) => void; reject: (reason?: unknown) => void }
@@ -24,12 +24,12 @@ export class JustCallDialerEventListeners {
     onLogout,
     clientEventEmitter,
   }: {
-    onLogin: LoginCallback;
-    onLogout: LogoutCallback;
+    onLogin: LoginCallback | null;
+    onLogout: LogoutCallback | null;
     clientEventEmitter: JustCallClientEventEmitter;
   }) {
-    this.onLogin = onLogin;
-    this.onLogout = onLogout;
+    if (onLogin) this.onLogin = onLogin;
+    if (onLogout) this.onLogout = onLogout;
     this.justcallClientEventEmitter = clientEventEmitter;
   }
 

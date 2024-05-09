@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.3.0
+
+### Minor Changes
+
+- 01afe38: Onlogin, OnLogout callbacks optional
+
 ## 1.2.1
 
 ### Patch Changes

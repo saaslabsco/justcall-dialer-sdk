@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.3.1
+
+### Patch Changes
+
+- 39fb880: Changed default dialer width to 365px
+
 ## 1.3.0
 
 ### Minor Changes

@@ -255,7 +255,7 @@ Please note that @justcall/justcall-dialer-sdk will produce an iframe with the f
 <iframe
   allow="microphone; autoplay; clipboard-read; clipboard-write; hid"
   src="ttps://app.justcall.io/app/macapp/dialer_events"
-  style="width='350px' height='610px'"
+  style="width='365px' height='610px'"
 >
 </iframe>
 ```

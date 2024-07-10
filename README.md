@@ -1,4 +1,5 @@
 # JustCall SDK
+[![CI](https://github.com/saaslabsco/justcall-dialer-sdk/actions/workflows/main.yml/badge.svg)](https://github.com/saaslabsco/justcall-dialer-sdk/actions/workflows/main.yml)
 
 This repository contains the TypeScript code for the JustCall Dialer SDK, which allows integration of [JustCall Dialer](https://app.justcall.io/dialer) functionality into web applications.
 

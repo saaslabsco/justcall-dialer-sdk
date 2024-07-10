@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.3.2
+
+### Patch Changes
+
+- 0f8fa2a: Bump ws from 8.16.0 to 8.17.1
+
 ## 1.3.1
 
 ### Patch Changes

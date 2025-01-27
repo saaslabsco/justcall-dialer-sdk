@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 2.0.0
+
+### Major Changes
+
+- c43cb3f: Release OAuth implementation
+
 ## 1.3.2
 
 ### Patch Changes

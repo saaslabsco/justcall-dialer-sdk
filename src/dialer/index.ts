@@ -15,6 +15,7 @@ import {
   JustcallDialerError,
 } from "../utils/errors";
 import { validEmittableEvents } from "../utils/contants";
+import { Firebase } from "../lib/firebase";
 
 export class JustCallDialer {
   private dialerId: string;
@@ -26,6 +27,8 @@ export class JustCallDialer {
   private dialerReadyPromise: Promise<void>;
   private resolveDialerReadyPromise!: () => void;
   private rejectDialerReadyPromise!: () => void;
+  private firebase: Firebase;
+  private oauthCommunicationToken: string | null = null;
 
   public onLogin: LoginCallback | null = null;
   public onLogout: LogoutCallback | null = null;
@@ -39,7 +42,12 @@ export class JustCallDialer {
         throw handleError(JustcallDialerErrorCode.browser_environment_required);
       }
 
-      const { onLogin = null, onLogout = null, dialerId, onReady = null } = props;
+      const {
+        onLogin = null,
+        onLogout = null,
+        dialerId,
+        onReady = null,
+      } = props;
       this.onLogin = onLogin;
       this.onLogout = onLogout;
       this.dialerId = dialerId;
@@ -51,6 +59,7 @@ export class JustCallDialer {
       });
 
       this.clientEventEmitter = new JustCallClientEventEmitter();
+      this.firebase = new Firebase({});
       this.init();
     } catch (error) {
       /* istanbul ignore next -- @preserve */ {
@@ -84,6 +93,7 @@ export class JustCallDialer {
         onLogin: this.onLogin,
         onLogout: this.onLogout,
         clientEventEmitter: this.clientEventEmitter,
+        setOauthCommunicationToken: this.setOauthCommunicationToken,
       });
 
       this.dialerEventEmitter = new JustCallDialerEventEmitter(
@@ -109,6 +119,15 @@ export class JustCallDialer {
         throw handleError(JustcallDialerErrorCode.unknown_error);
       }
     }
+  }
+
+  private setOauthCommunicationToken(token: string) {
+    console.log(
+      "@justcall/justcall-dialer-sdk: setOauthCommunicationToken",
+      token
+    );
+    this.oauthCommunicationToken = token;
+    this.firebase.setupSessionDoc(token);
   }
 
   public on(event: JustCallDialerEmittableEvent, callback: Function) {

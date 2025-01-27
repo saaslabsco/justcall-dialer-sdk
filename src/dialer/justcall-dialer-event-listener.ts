@@ -7,6 +7,7 @@ import {
   LogoutCallback,
   JustCallDialerEvent,
   IsLoggedInData,
+  OauthSdkCommunicationTokenEventData,
 } from "../types";
 import { JustCallClientEventEmitter } from "./justcall-client-event-emitter";
 
@@ -18,19 +19,23 @@ export class JustCallDialerEventListeners {
     JustCallDialerEvent,
     { resolve: (value: boolean) => void; reject: (reason?: unknown) => void }
   > = new Map();
+  private oAuthCommunicationTokenSetter: (token: string) => void;
 
   constructor({
     onLogin,
     onLogout,
     clientEventEmitter,
+    setOauthCommunicationToken,
   }: {
     onLogin: LoginCallback | null;
     onLogout: LogoutCallback | null;
     clientEventEmitter: JustCallClientEventEmitter;
+    setOauthCommunicationToken: (token: string) => void;
   }) {
     if (onLogin) this.onLogin = onLogin;
     if (onLogout) this.onLogout = onLogout;
     this.justcallClientEventEmitter = clientEventEmitter;
+    this.oAuthCommunicationTokenSetter = setOauthCommunicationToken;
   }
 
   public startListening() {
@@ -52,7 +57,8 @@ export class JustCallDialerEventListeners {
         | CallRingingEventData
         | CallAnsweredEventData
         | CallEndedEventData
-        | IsLoggedInData;
+        | IsLoggedInData
+        | OauthSdkCommunicationTokenEventData;
     }>
   ): void => {
     const { name: eventType, data: eventData } = event.data;
@@ -92,6 +98,15 @@ export class JustCallDialerEventListeners {
           break;
         }
       }
+      case "oauth-sdk-communication-token": {
+        const token = eventData as OauthSdkCommunicationTokenEventData;
+        if (token) {
+          this.oAuthCommunicationTokenSetter(token);
+        }
+        break;
+      }
+      default:
+        break;
     }
   };
 }

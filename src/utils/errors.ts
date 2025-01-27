@@ -8,6 +8,7 @@ export enum JustcallDialerErrorCode {
   dialer_not_ready = "dialer_not_ready",
   not_subscribed_to_event = "not_subscribed_to_event",
   browser_environment_required = "browser_environment_required",
+  sdk_internal_error = "sdk_internal_error",
   unknown_error = "unknown_error",
 }
 
@@ -20,7 +21,8 @@ export class JustcallDialerError extends Error {
 }
 
 export const handleError = (
-  errorCode: JustcallDialerErrorCode
+  errorCode: JustcallDialerErrorCode,
+  message?: string
 ): JustcallDialerError => {
   switch (errorCode) {
     case JustcallDialerErrorCode.no_dialer_id:
@@ -47,6 +49,11 @@ export const handleError = (
     case JustcallDialerErrorCode.browser_environment_required:
       return new JustcallDialerError(
         JustcallDialerErrorCode.browser_environment_required
+      );
+    case JustcallDialerErrorCode.sdk_internal_error:
+      return new JustcallDialerError(
+        JustcallDialerErrorCode.sdk_internal_error,
+        message
       );
     default:
       return new JustcallDialerError(JustcallDialerErrorCode.unknown_error);

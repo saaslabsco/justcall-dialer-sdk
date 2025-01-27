@@ -48,6 +48,8 @@ export type CallEndedEventData = {
   duration: number;
 };
 
+export type OauthSdkCommunicationTokenEventData = string;
+
 export type IsLoggedInData = (typeof isLoggedIn)[number];
 
 type EventDataType = {
@@ -56,6 +58,7 @@ type EventDataType = {
   "call-answered": CallAnsweredEventData;
   "call-ended": CallEndedEventData;
   "is-logged-in": IsLoggedInData;
+  "oauth-sdk-communication-token": OauthSdkCommunicationTokenEventData;
 };
 
 type EventWithData<EventName extends keyof EventDataType> =
@@ -74,7 +77,9 @@ export type JustCallDialerEmittableEvent =
 
 export type JustCallDialerEmittableEventWithData = Exclude<
   JustCallDialerEventWithData,
-  EventWithData<"logged-in-status"> | EventWithData<"is-logged-in">
+  | EventWithData<"logged-in-status">
+  | EventWithData<"is-logged-in">
+  | EventWithData<"oauth-sdk-communication-token">
 >;
 
 export type JustCallClientEmitterFunc = (

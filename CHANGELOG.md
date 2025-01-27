@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 2.0.1
+
+### Patch Changes
+
+- 0a37ec9: Re-releasing
+
 ## 2.0.0
 
 ### Major Changes

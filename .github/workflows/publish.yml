@@ -25,6 +25,9 @@ jobs:
       - name: build
         run: pnpm run ci
 
+      - name: Authenticate with npm registry
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
       - name: Create Release Pull Request OR Publish
         id: changesets
         uses: changesets/action@v1
@@ -34,3 +37,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          DEBUG: npm:*

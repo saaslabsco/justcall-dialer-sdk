@@ -18,7 +18,7 @@
     "prepare": "husky",
     "ci": "pnpm run lint && pnpm run test && pnpm run build",
     "changeset:version": "changeset version && pnpm -r generate:version && git add --all",
-    "changeset:publish": "changeset publish --access public"
+    "changeset:publish": "changeset publish --access public --loglevel debug"
   },
   "keywords": [
     "justcall",

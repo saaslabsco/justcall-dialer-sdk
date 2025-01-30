@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.3.3
+
+### Patch Changes
+
+- fca78c5: Fix OAuth login through our SDK
+
 ## 1.3.2
 
 ### Patch Changes

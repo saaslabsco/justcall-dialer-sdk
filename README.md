@@ -4,6 +4,8 @@ This repository contains the TypeScript code for the JustCall Dialer SDK, which 
 
 You need a [JustCall](https://app.justcall.io/) account to be able to use the dialer and the following features.
 
+> **Note**: OAuth login through our SDK has been fixed and is now working properly across all versions of the SDK.
+
 ## Installation
 
 Install the SDK package using npm, yarn or pnpm:

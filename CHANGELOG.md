@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.3.4
+
+### Patch Changes
+
+- a107912: chore(deps): resolve security vulnerabilities via pnpm update
+
 ## 1.3.3
 
 ### Patch Changes

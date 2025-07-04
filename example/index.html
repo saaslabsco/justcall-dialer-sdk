@@ -1,52 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <script type="module">
-        import {JustCallDialer} from "./../dist/index.mjs"
-        
-        const dialer = new JustCallDialer({
-            dialerId: "justcall-dialer",
-            onLogin: (data) => {
-                console.log("Client receiving Logged in data: ", data)
-            },
-            onLogout: () => {
-                console.log("Client receiving Logged out")
-            },
-            onReady: () => {
-                console.log("Client receiving on ready callback")
-            }
-        })
+      import { JustCallDialer } from "./../dist/index.mjs";
 
-        dialer.on("call-ringing", data => {
-            console.log("Client receiving call-ringing data: ", data)
-        })
+      const dialer = new JustCallDialer({
+        dialerId: "justcall-dialer",
+        onLogin: (data) => {
+          console.log("Client receiving Logged in data: ", data);
+        },
+        onLogout: () => {
+          console.log("Client receiving Logged out");
+        },
+        onReady: () => {
+          console.log("Client receiving on ready callback");
+        },
+      });
 
-        dialer.on("call-answered", data => {
-            console.log("Client receiving call-answered data: ", data)
-        })
+      dialer.on("call-ringing", (data) => {
+        console.log("Client receiving call-ringing data: ", data);
+      });
 
-        dialer.on("call-ended",function(data) {
-            console.log("Client receiving call-ended data: ", data)
-        })
+      dialer.on("call-answered", (data) => {
+        console.log("Client receiving call-answered data: ", data);
+      });
 
-        console.log("Client receiving is dialer ready: ", dialer.isDialerReady);
+      dialer.on("call-ended", function (data) {
+        console.log("Client receiving call-ended data: ", data);
+      });
 
-        await dialer.ready();
+      dialer.on("sms-received", function (data) {
+        console.log("Client receiving sms-received data: ", data);
+      });
 
-        console.log("Client receiving is dialer ready: ", dialer.isDialerReady);
+      console.log("Client receiving is dialer ready: ", dialer.isDialerReady);
 
-        const isLoggedIn = await dialer.isLoggedIn();
+      await dialer.ready();
 
-        console.log("Client receiving is-logged-in data: ", isLoggedIn);
+      console.log("Client receiving is dialer ready: ", dialer.isDialerReady);
 
-        dialer.dialNumber("+123456789990");
+      const isLoggedIn = await dialer.isLoggedIn();
+
+      console.log("Client receiving is-logged-in data: ", isLoggedIn);
+
+      dialer.dialNumber("+123456789990");
     </script>
 
-    <div id="justcall-dialer" style="position:fixed; bottom:20px; right:20px;"></div>
-</body>
+    <div
+      id="justcall-dialer"
+      style="position: fixed; bottom: 20px; right: 20px"
+    ></div>
+  </body>
 </html>

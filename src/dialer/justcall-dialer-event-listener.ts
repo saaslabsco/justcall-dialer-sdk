@@ -7,6 +7,7 @@ import {
   LogoutCallback,
   JustCallDialerEvent,
   IsLoggedInData,
+  SMSReceivedEventData,
 } from "../types";
 import { JustCallClientEventEmitter } from "./justcall-client-event-emitter";
 
@@ -52,6 +53,7 @@ export class JustCallDialerEventListeners {
         | CallRingingEventData
         | CallAnsweredEventData
         | CallEndedEventData
+        | SMSReceivedEventData
         | IsLoggedInData;
     }>
   ): void => {
@@ -80,6 +82,11 @@ export class JustCallDialerEventListeners {
       case "call-ended":
         this.justcallClientEventEmitter.handleCallEnded(
           eventData as CallEndedEventData
+        );
+        break;
+      case "sms-received":
+        this.justcallClientEventEmitter.handleSMSReceived(
+          eventData as SMSReceivedEventData
         );
         break;
       case "is-logged-in": {

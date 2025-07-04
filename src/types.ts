@@ -48,6 +48,14 @@ export type CallEndedEventData = {
   duration: number;
 };
 
+export type SMSReceivedEventData = {
+  message_sid: string;
+  from: string;
+  to: string;
+  body: string;
+  received_at: string;
+};
+
 export type IsLoggedInData = (typeof isLoggedIn)[number];
 
 type EventDataType = {
@@ -56,12 +64,13 @@ type EventDataType = {
   "call-answered": CallAnsweredEventData;
   "call-ended": CallEndedEventData;
   "is-logged-in": IsLoggedInData;
+  "sms-received": SMSReceivedEventData;
 };
 
 type EventWithData<EventName extends keyof EventDataType> =
   EventName extends keyof EventDataType
-    ? { name: EventName; data: EventDataType[EventName] }
-    : never;
+  ? { name: EventName; data: EventDataType[EventName] }
+  : never;
 
 export type JustCallDialerEvent = (typeof validEvents)[number];
 

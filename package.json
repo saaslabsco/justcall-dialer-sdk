@@ -1,6 +1,6 @@
 {
   "name": "@justcall/justcall-dialer-sdk",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "description": "SDK for seamless integration and communication with the JustCall Dialer across diverse web environments.",
   "private": false,
   "main": "./dist/index.js",

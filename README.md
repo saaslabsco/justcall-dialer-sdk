@@ -63,6 +63,7 @@ The `on` method of the `JustCallDialer` class allows you to listen for events em
   - `call-ringing`: Triggered when an incoming/outgoing call starts ringing.
   - `call-answered`: Triggered when an incoming/outgoing call is answered.
   - `call-ended`: Triggered when a incoming/outgoing call ends.
+  - `sms-received`: Triggered when an SMS is received.
 
 - `callback`: A callback function that will be executed when the specified event occurs. The function receives event data as a parameter.
 
@@ -79,6 +80,10 @@ dialer.on("call-answered", (data) => {
 
 dialer.on("call-ended", function (data) {
   console.log("Client receiving call-ended data: ", data);
+});
+
+dialer.on("sms-received", function (data) {
+  console.log("Client receiving sms-received data: ", data);
 });
 ```
 
@@ -232,6 +237,26 @@ This data object is passed to the callback function when a call ends. It contain
 }
 ```
 
+### `SMSReceivedEventData`
+
+This data object is passed to the callback function when an SMS is received. It contains the following properties:
+
+- `message_sid` (string): The unique identifier for the SMS session.
+- `from` (string): The phone number of the sender.
+- `to` (string): The phone number of the receiver.
+- `body` (string): The body of the SMS.
+- `received_at` (string): The date and time when the SMS was received.
+
+```json
+{
+  "message_sid": "",
+  "from": "",
+  "to": "",
+  "body": "",
+  "received_at": ""
+}
+```
+
 ## Justcall Dialer Error Codes
 
 The `JustcallDialerErrorCode` enum provides error codes for handling various scenarios in the JustCall Dialer SDK.
@@ -256,7 +281,7 @@ Please note that @justcall/justcall-dialer-sdk will produce an iframe with the f
 ```html
 <iframe
   allow="microphone; autoplay; clipboard-read; clipboard-write; hid"
-  src="ttps://app.justcall.io/app/macapp/dialer_events"
+  src="https://app.justcall.io/app/macapp/dialer_events"
   style="width='365px' height='610px'"
 >
 </iframe>

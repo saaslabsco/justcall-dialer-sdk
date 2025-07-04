@@ -7,6 +7,7 @@ import {
   LoggedInEventData,
   LoginCallback,
   LogoutCallback,
+  SMSReceivedEventData,
 } from "../types";
 
 import { JustcallDialerErrorCode, handleError } from "../utils/errors";
@@ -62,5 +63,9 @@ export class JustCallClientEventEmitter {
 
   public handleCallEnded(data: CallEndedEventData): void {
     this.emit({ name: "call-ended", data });
+  }
+
+  public handleSMSReceived(data: SMSReceivedEventData): void {
+    this.emit({ name: "sms-received", data });
   }
 }

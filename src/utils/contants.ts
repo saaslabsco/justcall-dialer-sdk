@@ -8,6 +8,7 @@ export const validEmittableEvents = [
   "call-ringing",
   "call-answered",
   "call-ended",
+  "sms-received",
 ] as const;
 
 export const validEvents = [

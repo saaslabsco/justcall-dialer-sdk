@@ -1,4 +1,4 @@
-# JustCall SDK
+# Embed our JustCall CTI into your Platform for Instant Calling & Messaging
 
 This repository contains the TypeScript code for the JustCall Dialer SDK, which allows integration of [JustCall Dialer](https://app.justcall.io/dialer) functionality into web applications.
 

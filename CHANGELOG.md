@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.4.1
+
+### Patch Changes
+
+- bc65401: docs: replace documentation heading
+
 ## 1.4.0
 
 ### Minor Changes

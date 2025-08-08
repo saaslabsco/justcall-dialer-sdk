@@ -1,6 +1,6 @@
 # Embed our JustCall CTI into your Platform for Instant Calling & Messaging
 
-This repository contains the TypeScript code for the JustCall Dialer SDK, which allows integration of [JustCall Dialer](https://app.justcall.io/dialer) functionality into web applications.
+This repository contains the TypeScript code for the JustCall CTI, which allows integration of [JustCall Dialer](https://app.justcall.io/dialer) functionality into web applications.
 
 You need a [JustCall](https://app.justcall.io/) account to be able to use the dialer and the following features.
 
@@ -28,7 +28,7 @@ pnpm add @justcall/justcall-dialer-sdk
 
 ## Constructor
 
-To use the JustCall Dialer SDK, you need to create an instance of the `JustCallDialer` class using its constructor. The constructor accepts an object with the following parameters:
+To use the JustCall CTI, you need to create an instance of the `JustCallDialer` class using its constructor. The constructor accepts an object with the following parameters:
 
 - `dialerId`: The id of the HTML element where the JustCall Dialer iframe will be embedded.
 - `onLogin`: A callback function triggered when the user logs in. It receives user details and integration settings, if any.
@@ -259,7 +259,7 @@ This data object is passed to the callback function when an SMS is received. It 
 
 ## Justcall Dialer Error Codes
 
-The `JustcallDialerErrorCode` enum provides error codes for handling various scenarios in the JustCall Dialer SDK.
+The `JustcallDialerErrorCode` enum provides error codes for handling various scenarios in the JustCall CTI.
 
 ### Error Codes:
 
@@ -269,10 +269,10 @@ The `JustcallDialerErrorCode` enum provides error codes for handling various sce
 - `not_subscribed_to_event`: This error occurs when attempting to unsubscribe from an event that you were not subscribed to in the first place.
 - `no_dialer_id`: This error occurs when no dialer ID is provided.
 - `dialer_id_not_found`: This error occurs when the specified dialer ID is not found.
-- `browser_environment_required`: This error occurs when the JustCall Dialer SDK is run in non-browser environments.
-- `unknown_error`: This error occurs when an unknown error is encountered during the operation of the JustCall Dialer SDK.
+- `browser_environment_required`: This error occurs when the JustCall CTI is run in non-browser environments.
+- `unknown_error`: This error occurs when an unknown error is encountered during the operation of the JustCall CTI.
 
-These error codes are useful for identifying and handling different error scenarios in the JustCall Dialer SDK.
+These error codes are useful for identifying and handling different error scenarios in the JustCall CTI.
 
 ## Authorizations for `<iframe>`
 
@@ -289,7 +289,7 @@ Please note that @justcall/justcall-dialer-sdk will produce an iframe with the f
 
 ## Contribution
 
-We welcome contributions from the community to improve the JustCall Dialer SDK. To contribute, follow these steps:
+We welcome contributions from the community to improve the JustCall CTI. To contribute, follow these steps:
 
 1. Make sure you have [PNPM](https://pnpm.io/) installed on your machine.
 

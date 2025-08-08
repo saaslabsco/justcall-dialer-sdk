@@ -1,7 +1,7 @@
 {
   "name": "@justcall/justcall-dialer-sdk",
   "version": "1.4.1",
-  "description": "SDK for seamless integration and communication with the JustCall Dialer across diverse web environments.",
+  "description": "Integrate JustCall’s powerful CTI (Computer Telephony Integration) into your web platform to enable instant calling, and messaging—directly from your app. Our SDK makes it simple to embed a fully functional dialer and messaging system, ensuring seamless communication without switching tools.",
   "private": false,
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -49,15 +49,15 @@
   },
   "markdown-to-html": {
     "document": {
-      "title": "@justcall/justcall-dialer-sdk",
-      "description": "SDK for seamless integration and communication with the JustCall Dialer across diverse web environments.",
+      "title": "Embed our JustCall CTI into your Platform for Instant Calling & Messaging",
+      "description": "Integrate JustCall’s powerful CTI (Computer Telephony Integration) into your web platform to enable instant calling, and messaging—directly from your app. Our SDK makes it simple to embed a fully functional dialer and messaging system, ensuring seamless communication without switching tools.",
       "style": "",
       "meta": [
         {
-          "description": "SDK for seamless integration and communication with the JustCall Dialer across diverse web environments."
+          "description": "Integrate JustCall’s powerful CTI (Computer Telephony Integration) into your web platform to enable instant calling, and messaging—directly from your app. Our SDK makes it simple to embed a fully functional dialer and messaging system, ensuring seamless communication without switching tools."
         },
         {
-          "keywords": "Justcall SDK, @justcall/justcall-dialer-sdk, Justcall dialer sdk, Justcall NPM"
+          "keywords": "Justcall SDK, @justcall/justcall-dialer-sdk, Justcall dialer sdk, Justcall NPM, JustCall CTI, embedded cloud phone system, in-app calling and messaging SDK, web telephony SDK, in-app VoIP and SMS solution"
         }
       ]
     },

@@ -1,5 +1,11 @@
 # @justcall/justcall-dialer-sdk
 
+## 1.4.2
+
+### Patch Changes
+
+- e07afb7: docs: copy changes
+
 ## 1.4.1
 
 ### Patch Changes

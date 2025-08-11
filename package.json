@@ -1,6 +1,6 @@
 {
   "name": "@justcall/justcall-dialer-sdk",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Integrate JustCall’s powerful CTI (Computer Telephony Integration) into your web platform to enable instant calling, and messaging—directly from your app. Our SDK makes it simple to embed a fully functional dialer and messaging system, ensuring seamless communication without switching tools.",
   "private": false,
   "main": "./dist/index.js",

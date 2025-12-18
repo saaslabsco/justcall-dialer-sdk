@@ -67,6 +67,11 @@
       "README.md": "index.html"
     }
   },
+  "pnpm": {
+    "overrides": {
+      "form-data": ">=4.0.4"
+    }
+  },
   "husky": {
     "hooks": {
       "pre-commit": "pnpm run precommit"
